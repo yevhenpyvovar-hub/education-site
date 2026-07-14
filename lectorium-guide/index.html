@@ -1,109 +1,328 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lectorium Guide — Short Version</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lectorium · Технічний гайд оператора</title>
 <style>
   :root {
-    --text: #2f2f2f;
-    --muted: #6b6b6b;
-    --border: #e3e3e1;
-    --bg-soft: #f7f7f5;
-    --accent: #c0392b;
-    --ok: #1e7d3c;
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1d222c;
+    --border: #2a3140;
+    --text: #e6e8ec;
+    --muted: #a3adbd;
+    --accent: #5aa0ff;
+    --accent-2: #6ad29a;
+    --warn: #ffb55a;
+    --danger: #ff6a6a;
+    --code-bg: #0b0e13;
+    --code-border: #2a3140;
+    --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
   }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --panel-2: #f0f2f6;
+      --border: #d8dde6;
+      --text: #1a1d23;
+      --muted: #4f5a69;
+      --accent: #2566c8;
+      --accent-2: #1f8a52;
+      --warn: #b15c00;
+      --danger: #c0392b;
+      --code-bg: #f0f2f6;
+      --code-border: #d8dde6;
+    }
+  }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
   * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    background: #ffffff;
-  }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
     color: var(--text);
     line-height: 1.55;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 1.5em 1.25em 4em;
+    font-size: 15.5px;
   }
-  h1 { font-size: 1.7rem; margin: 1.6em 0 0.4em; line-height: 1.25; }
-  h1:first-of-type { margin-top: 0; }
-  h2 { font-size: 1.3rem; margin: 1.2em 0 0.3em; }
-  h3 { font-size: 1.1rem; margin: 1em 0 0.3em; }
-  h4 { font-size: 1rem; margin: 0.9em 0 0.25em; color: var(--muted); }
-  p { margin: 0.5em 0; }
-  ul, ol { margin: 0.4em 0; padding-left: 1.4em; }
-  li { margin: 0.2em 0; }
-  a { color: #1a5fb4; }
-  img {
-    max-width: 100%;
-    height: auto;
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre, kbd { font-family: var(--font-mono); }
+  code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--code-border); font-size: 0.9em; }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
     border-radius: 8px;
+    padding: 12px 14px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  /* layout */
+  .app { display: grid; grid-template-columns: 270px minmax(0, 1fr); min-height: 100vh; width: 100%; }
+  .sidebar {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 22px 18px 30px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar h1 { font-size: 15px; font-weight: 700; margin: 0 0 4px; line-height: 1.3; }
+  .sidebar .meta { font-size: 11.5px; color: var(--muted); margin-bottom: 18px; }
+  .nav-menu-toggle {
+    display: none;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--panel-2);
     border: 1px solid var(--border);
-    margin: 0.6em 0;
-    display: block;
-  }
-  code { background: var(--bg-soft); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.92em; }
-  .page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 0.6em;
-  }
-  details {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin: 0.9em 0;
-    padding: 0.15em 1em 0.9em;
-    background: #fff;
-  }
-  details > summary {
+    border-radius: 6px;
+    color: var(--text);
     cursor: pointer;
-    font-weight: 700;
-    font-size: 1.25rem;
-    padding: 0.7em 0;
-    list-style: none;
+    font: inherit;
+    font-size: 13.5px;
+    margin: 10px 0 12px;
+    padding: 8px 10px;
   }
-  details > summary::-webkit-details-marker { display: none; }
-  details > summary::before {
-    content: "▸ ";
-    color: var(--muted);
-  }
-  details[open] > summary::before {
-    content: "▾ ";
-  }
-  .callout {
-    border-radius: 8px;
-    padding: 0.7em 1em;
-    margin: 0.7em 0;
+  .nav-menu-toggle::after { content: "▾"; color: var(--muted); font-size: 12px; transition: transform .18s ease; }
+  .sidebar.nav-open .nav-menu-toggle::after { transform: rotate(180deg); }
+  .nav-controls { margin-bottom: 10px; }
+  .nav-search {
+    width: 100%;
+    background: var(--code-bg);
     border: 1px solid var(--border);
-    background: var(--bg-soft);
+    border-radius: 7px;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    padding: 8px 10px;
   }
-  .callout.done { border-color: #bfe3c9; background: #f2faf4; }
-  .callout.warn { border-color: #f0cfc9; background: #fbf1ef; }
+  .nav-search::placeholder { color: var(--muted); }
+  .nav-group { margin: 2px 0; }
+  .nav-group-head { display: grid; grid-template-columns: 1fr 28px; align-items: center; gap: 4px; margin-top: 12px; }
+  .nav-collapse {
+    width: 28px; height: 28px; display: grid; place-items: center;
+    background: transparent; border: 1px solid transparent; border-radius: 6px;
+    color: var(--muted); cursor: pointer; font: inherit; line-height: 1;
+  }
+  .nav-collapse:hover { background: var(--panel-2); border-color: var(--border); color: var(--text); }
+  .nav-collapse::before { content: "▾"; font-size: 11px; transition: transform .18s ease; }
+  .nav-group.is-collapsed .nav-collapse::before { transform: rotate(-90deg); }
+  .nav-group.is-collapsed .nav-group-items { display: none; }
+  .sidebar.nav-searching .nav-group.is-collapsed .nav-group-items { display: block; }
+  .nav-group.is-hidden, .sidebar nav a.is-hidden { display: none; }
+  .nav-empty { display: none; color: var(--muted); font-size: 12.5px; padding: 8px 10px; }
+  .nav-empty.is-visible { display: block; }
+  .sidebar nav a {
+    display: block; padding: 6px 10px; margin: 2px 0; border-radius: 6px;
+    color: var(--text); font-size: 13.5px; border-left: 2px solid transparent;
+  }
+  .sidebar nav a:hover { background: var(--panel-2); text-decoration: none; }
+  .sidebar nav a.is-active { background: var(--panel-2); color: var(--text); border-left-color: var(--accent-2); }
+  .sidebar nav a.sub { padding: 5px 10px 5px 20px; font-size: 12.8px; color: var(--muted); }
+  .sidebar nav a.sub.is-active { color: var(--text); }
+  .sidebar nav a.section-head {
+    margin-top: 0; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--muted); border-left-color: transparent; padding: 7px 10px 7px 8px;
+  }
+  .sidebar nav a.section-head:hover { color: var(--text); background: var(--panel-2); }
+  .sidebar nav a.section-head.is-active { color: var(--accent); border-left-color: var(--accent); background: var(--panel-2); }
+
+  .content { padding: 28px 40px 80px; width: 100%; max-width: 860px; min-width: 0; }
+  .content h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0 8px; }
+  .content h2 { font-size: 20px; font-weight: 700; margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); scroll-margin-top: 20px; }
+  .content h3 { font-size: 16px; font-weight: 600; margin: 26px 0 8px; scroll-margin-top: 20px; }
+  .content h4 { font-size: 14.5px; margin: 18px 0 6px; color: var(--text); font-weight: 650; }
+  .content p { margin: 8px 0 12px; }
+  .content ul, .content ol { padding-left: 22px; margin: 8px 0 12px; }
+  .content li { margin: 4px 0; }
+  img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0; display: block; }
+
+  .operator-card {
+    background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; margin: 18px 0 24px; padding: 16px;
+  }
+  .operator-card .eyebrow { color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: .08em; margin-bottom: 10px; text-transform: uppercase; }
+  .operator-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .operator-item { background: var(--panel-2); border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; }
+  .operator-item strong { display: block; font-size: 12.5px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+  .operator-item span { color: var(--muted); display: block; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--panel); border-radius: 7px; padding: 12px 16px; margin: 12px 0; }
+  .callout.info { border-left-color: var(--accent); }
+  .callout.ok { border-left-color: var(--accent-2); background: color-mix(in srgb, var(--bg) 88%, var(--accent-2)); }
+  .callout.warn { border-left-color: var(--warn); background: color-mix(in srgb, var(--bg) 88%, var(--warn)); }
+  .callout.danger { border-left-color: var(--danger); background: color-mix(in srgb, var(--bg) 85%, var(--danger)); }
+  .callout .label {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; margin-right: 8px; color: var(--accent);
+  }
+  .callout.ok .label { color: var(--accent-2); }
+  .callout.warn .label { color: var(--warn); }
+  .callout.danger .label { color: var(--danger); }
+
+  .schema {
+    font-family: var(--font-mono); font-size: 13px; line-height: 1.65; white-space: pre;
+    background: var(--code-bg); border-radius: 8px; border-left: 3px solid var(--accent);
+    padding: 14px 18px; margin: 12px 0; overflow-x: auto;
+  }
+  .schema-video { border-left-color: #F2C744; background: color-mix(in srgb, var(--code-bg) 90%, #F2C744); }
+  .schema-audio { border-left-color: #3ecf82; background: color-mix(in srgb, var(--code-bg) 90%, #3ecf82); }
+  .schema-network { border-left-color: #1FB3A6; background: color-mix(in srgb, var(--code-bg) 90%, #1FB3A6); }
+
+  table.t { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  table.t th, table.t td { border-bottom: 1px solid var(--border); padding: 8px 13px; text-align: left; vertical-align: top; }
+  table.t th { background: var(--panel-2); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  table.t tbody tr:nth-child(even) { background: color-mix(in srgb, var(--bg) 96%, var(--text)); }
+  table.t tbody tr:hover { background: var(--panel-2); }
+  table.t tbody tr:last-child td { border-bottom: none; }
+
+  .checklist { list-style: none; padding: 0; margin: 8px 0 16px; }
+  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 7px 8px; border-radius: 6px; }
+  .checklist li:hover { background: var(--panel-2); }
+  .checklist input[type="checkbox"] { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--accent-2); flex-shrink: 0; cursor: pointer; }
+  .checklist label { cursor: pointer; flex: 1; }
+  .checklist input:checked + label { text-decoration: line-through; color: var(--muted); }
+  .checklist-actions { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }
+  .checklist-actions button { background: none; border: 1px solid var(--border); color: var(--muted); padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .checklist-actions button:hover { color: var(--text); border-color: var(--accent); }
+
   .video-link {
-    display: inline-block;
-    margin: 0.5em 0;
-    padding: 0.5em 0.9em;
-    border-radius: 8px;
-    background: var(--bg-soft);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 7px; margin: 6px 0; padding: 7px 14px; border-radius: 8px;
+    background: var(--panel-2); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 13px;
   }
-  .video-link:before { content: "▶ "; }
-  .contacts { border-collapse: collapse; width: 100%; margin: 0.6em 0; }
-  .contacts td { padding: 0.35em 0.6em 0.35em 0; vertical-align: top; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  .video-link:hover { background: color-mix(in srgb, var(--panel-2) 80%, var(--accent)); text-decoration: none; }
+  .video-link::before { content: "▶"; font-size: 11px; }
+
+  .contacts td { padding: 5px 10px 5px 0; vertical-align: top; }
+
+  hr.soft { border: none; border-top: 1px solid var(--border); margin: 26px 0; }
+  .back-top {
+    align-items: center; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px;
+    bottom: 18px; color: var(--text); display: inline-flex; height: 36px; justify-content: center;
+    position: fixed; right: 18px; width: 36px; z-index: 15;
+  }
+  .back-top:hover { border-color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 880px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { position: sticky; top: 0; z-index: 20; width: 100vw; max-width: 100vw; height: auto; max-height: 85vh; padding: 14px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.22); }
+    .nav-menu-toggle { display: flex; }
+    .sidebar:not(.nav-open) .nav-controls, .sidebar:not(.nav-open) nav, .sidebar:not(.nav-open) .nav-empty { display: none; }
+    .content { width: 100vw; max-width: 100vw; overflow-x: hidden; padding: 20px; }
+    .content h1 { font-size: 24px; }
+    .operator-grid { grid-template-columns: 1fr; }
+    .checklist li { padding: 8px; }
+    .checklist input[type="checkbox"] { width: 20px; height: 20px; }
+  }
+
+  @media print {
+    .sidebar, .checklist-actions, .back-top { display: none; }
+    .app { display: block; }
+    .content { padding: 0; max-width: 100%; }
+    body { background: #fff; color: #000; }
+  }
 </style>
 </head>
 <body>
+<div class="app">
 
-<h1 class="page-title">Lectorium Guide — Short Version</h1>
+<aside class="sidebar">
+  <h1>Lectorium · Верхній Вал</h1>
+  <div class="meta">Технічний гайд для оператора</div>
 
-<details open>
-<summary>Передстартовий чекліст</summary>
+  <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="guide-nav">Навігація</button>
+  <div class="nav-controls">
+    <input class="nav-search" type="search" placeholder="Пошук по розділах" aria-label="Пошук по навігації">
+  </div>
+  <nav id="guide-nav" aria-label="Навігація по гайду">
+    <a href="#checklist" class="section-head">Передстартовий чекліст</a>
+    <a href="#c-power" class="sub">Живлення</a>
+    <a href="#c-mics" class="sub">Мікрофони</a>
+    <a href="#c-macbook" class="sub">MacBook</a>
+    <a href="#c-appletv" class="sub">AppleTV / проєктор</a>
+    <a href="#c-clicker" class="sub">Клікер</a>
+    <a href="#c-xenyx" class="sub">XENYX Q802USB</a>
+    <a href="#c-camera" class="sub">Камера</a>
+    <a href="#c-callmeeting" class="sub">Zoom/Google Meet</a>
 
-<h2>Живлення</h2>
+    <a href="#step1" class="section-head">Крок 1 · Мікрофони</a>
+    <a href="#s1-headset" class="sub">Гарнітура</a>
+    <a href="#s1-handheld" class="sub">Ручний мікрофон</a>
+
+    <a href="#step2" class="section-head">Крок 2 · Зображення</a>
+    <a href="#s2-projector" class="sub">Увімкнути проєктор</a>
+    <a href="#s2-connect" class="sub">Підключення до проєктора</a>
+
+    <a href="#step3" class="section-head">Крок 3 · Презентація</a>
+    <a href="#s3-slides" class="sub">Google Slides</a>
+    <a href="#s3-ppt" class="sub">PowerPoint</a>
+    <a href="#s3-keynote" class="sub">Keynote</a>
+
+    <a href="#step4" class="section-head">Крок 4 · Клікер</a>
+
+    <a href="#step5" class="section-head">Крок 5 · Перевірка трансляції</a>
+    <a href="#s5-meet" class="sub">Google Meet</a>
+    <a href="#s5-zoom" class="sub">Zoom</a>
+
+    <a href="#step6" class="section-head">Крок 6 · Презентація онлайн</a>
+    <a href="#s6-meet" class="sub">Google Meet</a>
+    <a href="#s6-zoom" class="sub">Zoom</a>
+
+    <a href="#shutdown" class="section-head">Відключення лекторія</a>
+    <a href="#sd-mics" class="sub">Мікрофони</a>
+    <a href="#sd-projector" class="sub">Проєктор</a>
+
+    <a href="#troubleshoot" class="section-head">Що робити, якщо не працює</a>
+    <a href="#t-contacts" class="sub">Контакти</a>
+    <a href="#t-quick" class="sub">Швидка таблиця</a>
+  </nav>
+  <div class="nav-empty" aria-live="polite">Нічого не знайдено.</div>
+</aside>
+
+<main id="content" class="content">
+
+<h1>Lectorium — Верхній Вал</h1>
+<p style="color:var(--muted); margin-top:0;">Короткий технічний гайд для оператора: передстартовий чекліст, покроковий запуск обладнання і trouble­shooting.</p>
+
+<section class="operator-card" aria-label="Коротко для оператора">
+  <div class="eyebrow">Коротко для оператора</div>
+  <div class="operator-grid">
+    <div class="operator-item">
+      <strong>MacBook</strong>
+      <span>Пароль: <code>Qwerty</code>. Wi-Fi: <code>Event_5Ghz</code>, пароль <code>GenesisTech</code>.</span>
+    </div>
+    <div class="operator-item">
+      <strong>Звук / вихід</strong>
+      <span>Settings → Sound → Output: <code>School 1 AirPlay</code> для Lectorium1, <code>School 2 AirPlay</code> для Lectorium2. Input: <code>USB Audio CODEC</code>.</span>
+    </div>
+    <div class="operator-item">
+      <strong>Мікрофони</strong>
+      <span>Зелений ручний мікрофон — Lectorium1, синій — Lectorium2. Заряджаються на станції в шафі.</span>
+    </div>
+    <div class="operator-item">
+      <strong>Zoom / Meet</strong>
+      <span>Мікрофон — <code>USB Audio CODEC</code>, камера — <code>Meeting Owl Camera</code>, колонки — School 1/2 AirPlay.</span>
+    </div>
+    <div class="operator-item">
+      <strong>Ескалація</strong>
+      <span>Є проблема, яку не вирішити за 2 хв — дзвонити інженеру (див. розділ Troubleshooting).</span>
+    </div>
+    <div class="operator-item">
+      <strong>Перед стартом</strong>
+      <span>Мікрофони, зображення на проєктор, тестовий учасник у Meet/Zoom — перевірити все до початку події.</span>
+    </div>
+  </div>
+</section>
+
+<h2 id="checklist">Передстартовий чекліст</h2>
+
+<h3 id="c-power">Живлення</h3>
 <p>Усі наступні прилади підключені до живлення та мають світлову індикацію:</p>
 <ul>
   <li>Kramer 20-port audio matrix (комутатор звуку)</li>
@@ -112,273 +331,214 @@
   <li>Мікрофонні бази</li>
 </ul>
 
-<h2>Мікрофони</h2>
-<ol>
-  <li>Ручні мікрофони стоять на зарядній станції, а зарядна станція подає світловий сигнал</li>
-  <li>Мікрофони увімкнені</li>
-</ol>
-
-<h2>MacBook</h2>
-<ol>
-  <li>Увімкнений і розблокований (Пароль: Qwerty)</li>
-  <li>До нього підключений USB-Hub</li>
-  <li>Підключений до живлення через USB-Hub і має індикацію заряджання вгорі екрану на позначці батареї</li>
-  <li>Підключений до Wi-Fi "Event_5Ghz" (Пароль GenesisTech)</li>
-</ol>
-
-<h2>AppleTV / проєктор</h2>
-<ol>
-  <li>AppleTV увімкнений та має світлову індикацію</li>
-  <li>Проєктор увімкнений та виводить стартове зображення Apple TV</li>
-  <li>MacBook підключений до AppleTV</li>
-  <li>Зображення виводиться на екран як Extended Display</li>
-  <li>В Settings &gt; Sound &gt; Output &gt; Обрано
-    <ul>
-      <li>School 1 AirPlay - для першого лекторію</li>
-      <li>School 2 AirPlay - для другого лекторію</li>
-    </ul>
-  </li>
-</ol>
-
-<h2>Клікер</h2>
-<ul>
-  <li>Підключений до USB-Hub через USB роз'єм</li>
-  <li>Виконує свої функції</li>
+<h3 id="c-mics">Мікрофони</h3>
+<ul class="checklist" data-key="chk-mics">
+  <li><input type="checkbox" id="chk-m1"><label for="chk-m1">Ручні мікрофони стоять на зарядній станції, а зарядна станція подає світловий сигнал</label></li>
+  <li><input type="checkbox" id="chk-m2"><label for="chk-m2">Мікрофони увімкнені</label></li>
 </ul>
 
-<h2>XENYX Q802USB Мікшерний пульт (звук з мікрофонів в MacBook)</h2>
-<ol>
-  <li>Підключений до MacBook через USB роз'єм USB-Hub</li>
-  <li>В Settings &gt; Sound &gt; Input обрано USB Audio CODEC</li>
-  <li>В Settings &gt; Sound &gt; Input Level є графічний сигнал коли розмовляєш в мікрофон</li>
-</ol>
+<h3 id="c-macbook">MacBook</h3>
+<ul class="checklist" data-key="chk-macbook">
+  <li><input type="checkbox" id="chk-mb1"><label for="chk-mb1">Увімкнений і розблокований (Пароль: <code>Qwerty</code>)</label></li>
+  <li><input type="checkbox" id="chk-mb2"><label for="chk-mb2">До нього підключений USB-Hub</label></li>
+  <li><input type="checkbox" id="chk-mb3"><label for="chk-mb3">Підключений до живлення через USB-Hub і має індикацію заряджання вгорі екрану на позначці батареї</label></li>
+  <li><input type="checkbox" id="chk-mb4"><label for="chk-mb4">Підключений до Wi-Fi "Event_5Ghz" (Пароль <code>GenesisTech</code>)</label></li>
+</ul>
 
-<h2>Камера</h2>
-<ol>
-  <li>Підключена до живлення</li>
-  <li>Підключена до Macbook через окремий Type-C роз'єм</li>
-  <li>Має світлову індикацію</li>
-</ol>
+<h3 id="c-appletv">AppleTV / проєктор</h3>
+<ul class="checklist" data-key="chk-appletv">
+  <li><input type="checkbox" id="chk-tv1"><label for="chk-tv1">AppleTV увімкнений та має світлову індикацію</label></li>
+  <li><input type="checkbox" id="chk-tv2"><label for="chk-tv2">Проєктор увімкнений та виводить стартове зображення Apple TV</label></li>
+  <li><input type="checkbox" id="chk-tv3"><label for="chk-tv3">MacBook підключений до AppleTV</label></li>
+  <li><input type="checkbox" id="chk-tv4"><label for="chk-tv4">Зображення виводиться на екран як Extended Display</label></li>
+  <li><input type="checkbox" id="chk-tv5"><label for="chk-tv5">В Settings &gt; Sound &gt; Output обрано School 1/2 AirPlay</label></li>
+</ul>
 
-<h2>Zoom/Google Meet</h2>
+<h3 id="c-clicker">Клікер</h3>
+<ul class="checklist" data-key="chk-clicker">
+  <li><input type="checkbox" id="chk-cl1"><label for="chk-cl1">Підключений до USB-Hub через USB роз'єм</label></li>
+  <li><input type="checkbox" id="chk-cl2"><label for="chk-cl2">Виконує свої функції</label></li>
+</ul>
+
+<h3 id="c-xenyx">XENYX Q802USB Мікшерний пульт (звук з мікрофонів в MacBook)</h3>
+<ul class="checklist" data-key="chk-xenyx">
+  <li><input type="checkbox" id="chk-x1"><label for="chk-x1">Підключений до MacBook через USB роз'єм USB-Hub</label></li>
+  <li><input type="checkbox" id="chk-x2"><label for="chk-x2">В Settings &gt; Sound &gt; Input обрано USB Audio CODEC</label></li>
+  <li><input type="checkbox" id="chk-x3"><label for="chk-x3">В Settings &gt; Sound &gt; Input Level є графічний сигнал коли розмовляєш в мікрофон</label></li>
+</ul>
+
+<h3 id="c-camera">Камера</h3>
+<ul class="checklist" data-key="chk-camera">
+  <li><input type="checkbox" id="chk-cam1"><label for="chk-cam1">Підключена до живлення</label></li>
+  <li><input type="checkbox" id="chk-cam2"><label for="chk-cam2">Підключена до Macbook через окремий Type-C роз'єм</label></li>
+  <li><input type="checkbox" id="chk-cam3"><label for="chk-cam3">Має світлову індикацію</label></li>
+</ul>
+
+<h3 id="c-callmeeting">Zoom/Google Meet</h3>
 <p>Обрані потрібні мікрофон, колонки та камера:</p>
 <ul>
-  <li>Мікрофон - USB Audio CODEC</li>
-  <li>Колонки:
-    <ul>
-      <li>School 1 AirPlay - для першого лекторію</li>
-      <li>School 2 AirPlay - для другого лекторію</li>
-    </ul>
-  </li>
-  <li>Камера - Meeting Owl Camera</li>
+  <li>Мікрофон — <code>USB Audio CODEC</code></li>
+  <li>Колонки: <code>School 1 AirPlay</code> (Lectorium1) / <code>School 2 AirPlay</code> (Lectorium2)</li>
+  <li>Камера — <code>Meeting Owl Camera</code></li>
 </ul>
 
-<h2>Тестовий учасник у Meet / Zoom</h2>
+<h3>Тестовий учасник у Meet / Zoom</h3>
 <p>Зайти в Zoom або Google Meet (можна зайти зі свого ноутбуку) та перевірити:</p>
 <ul>
-  <li>чи є звук:
-    <ul>
-      <li>говориш в мікрофон — тебе чути з твого ноутбуку</li>
-      <li>говориш в свій ноутбук - тебе чути з колонок лекторію</li>
-    </ul>
-  </li>
+  <li>чи є звук: говориш в мікрофон — тебе чути з твого ноутбуку; говориш в свій ноутбук — тебе чути з колонок лекторію</li>
   <li>чи є відео з камери</li>
 </ul>
-</details>
 
-<hr>
+<!-- ============================================= -->
+<h2 id="step1">Крок 1: Увімкнення мікрофонів</h2>
 
-<details open>
-<summary>Крок 1: Увімкнення мікрофонів</summary>
-
-<h3>🔍 Що робити:</h3>
-
-<h4>Гарнітура ("Петлічка"):</h4>
-
+<h3 id="s1-headset">Гарнітура ("Петлічка")</h3>
 <p><strong>Як виглядає:</strong></p>
 <img src="photo_5217535802173234342_w.jpg" alt="Гарнітура">
-
 <ol>
   <li>Відкрити бічну кришку гарнітури. Затиснути на бічну кнопку та підняти кришку догори</li>
 </ol>
 <img src="photo_5217535802173234339_w_(1).jpg" alt="Відкриття кришки гарнітури">
-
 <ol start="2">
   <li>Вставити батареї згідно підказок з внутрішньої сторони кришки та на самих батареях (+ до +, - до -)</li>
 </ol>
 <img src="photo_5217535802173234337_w.jpg" alt="Батареї гарнітури">
-
 <ol start="3">
   <li>Увімкнути гарнітуру за допомогою перемикача Off/On</li>
 </ol>
 <img src="photo_5217535802173234336_w.jpg" alt="Перемикач гарнітури">
-
 <p><strong>Увімкнена гарнітура:</strong></p>
 <img src="photo_5217535802173234335_w.jpg" alt="Увімкнена гарнітура">
-
 <p><strong>📷 Відео інструкція:</strong></p>
 <a class="video-link" href="https://drive.google.com/file/d/1UBnYUlKe1vTL8hQPFfu1CObrW_9oD_hz/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
 
-<h4>Ручний мікрофон:</h4>
+<h3 id="s1-handheld">Ручний мікрофон</h3>
 <p>Взяти мікрофон зі станції яка знаходиться в Lectorium1 в технічному шкафу. <strong>Зелений</strong> мікрофон для Lectorium1 і <strong>Синій</strong> для Lectorium2.</p>
-
 <p><strong>Як виглядає мікрофон:</strong> (Приклад: мікрофон Lectorium2)</p>
 <img src="IMG_2394.jpg" alt="Ручний мікрофон">
+<p><strong>Увімкнений мікрофон</strong> має червону індикацію на нижній частині мікрофону, поруч з перемикачем "on/off". Якщо лампочка не горить, перемкни перемикач.</p>
 
-<p><strong>Увімкнений мікрофон</strong></p>
-<p>Увімкнений мікрофон має червону індикацію на нижній частині мікрофону, поруч з перемикачем "on/off". Якщо лампочка не горить, перемкни перемикач.</p>
-
-<div class="callout done">
-  <strong>✅ Готово, якщо:</strong> і гарнітура, і ручний мікрофон мають мати світлову індикацію. Коли кажеш щось в мікрофон, йде в Lectorium.
+<div class="callout ok">
+  <span class="label">Готово, якщо</span>
+  і гарнітура, і ручний мікрофон мають мати світлову індикацію. Коли кажеш щось в мікрофон, йде в Lectorium.
 </div>
-</details>
 
-<details open>
-<summary>Крок 2: Запуск та підключення до пристроїв для виведення зображення</summary>
+<!-- ============================================= -->
+<h2 id="step2">Крок 2: Запуск та підключення до пристроїв для виведення зображення</h2>
 
-<h3>Увімкнути Проєктор</h3>
-
-<h4>🔍 Що робити:</h4>
+<h3 id="s2-projector">Увімкнути Проєктор</h3>
 <p>Взяти пульт білого кольору, що знаходиться на верхній поличці шафи та натиснути кнопку з символом ⏻ направляючи його на проєктор.</p>
-
 <p><strong>🖼️ Як виглядає пульт:</strong></p>
 <img src="IMG_2396.jpg" alt="Пульт проєктора">
-
-<h4>🧑‍🔧 Що має статись:</h4>
 <p>Проєктор має подати звуковий сигнал (піщання), увімкнутись та вивести зображення. Час очікування +- 10 секунд.</p>
-
 <p><strong>📷 Відео інструкція:</strong></p>
 <a class="video-link" href="https://drive.google.com/file/d/1wFhcw0s6dYTFLnWnpMW7UEWhKMPiCloK/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
 
-<div class="callout warn">
-  <strong>⚠️ LECTORIUM 2: НЕ ЗАПУСКАЄТЬСЯ ПРОЕКТОР</strong>
-  <ol><li>Напишіть Техніку щоб він перезавантажив смарт розетку</li></ol>
+<div class="callout danger">
+  <span class="label">Lectorium 2 · не запускається проектор</span>
+  Напишіть Техніку щоб він перезавантажив смарт розетку.
 </div>
 
-<div class="callout warn">
-  <strong>⚠️ LECTORIUM 2: ПРОЕКТОР ВИДАЄ СІРИЙ ШУМ</strong>
-  <p>З лівої внутрішньої частини технічного шкафа висить пристрій Kramer. В нього є кабель живлення, який треба відкрутити, а потім витягнути. Після 5-секундного очікування можна підключати кабель.</p>
+<div class="callout danger">
+  <span class="label">Lectorium 2 · проектор видає сірий шум</span>
+  З лівої внутрішньої частини технічного шкафа висить пристрій Kramer. В нього є кабель живлення, який треба відкрутити, а потім витягнути. Після 5-секундного очікування можна підключати кабель.
 </div>
 
-<h3>Підключення до проєктора</h3>
-
-<h4>🔍 Що робити:</h4>
+<h3 id="s2-connect">Підключення до проєктора</h3>
+<div class="schema schema-video">MacBook ── HDMI/AirPlay ──► AppleTV / проєктор
+                              └─► Extended Display ── School 1/2 AirPlay (звук)</div>
 <ol>
-  <li>Відкрити та увімкнути MacBook локації, що лежить на столику біля шафи (Пароль: Qwerty)</li>
+  <li>Відкрити та увімкнути MacBook локації, що лежить на столику біля шафи (Пароль: <code>Qwerty</code>)</li>
   <li>Відкрити меню елементів керування через віджет у верхньому правому кутку екрану, біля дати та часу.</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1_tK_9nUE3qftSw-3rtIUdtaqIgL9Tp8v=w1600" alt="Меню елементів керування">
-
 <ol start="3">
   <li>У меню, що з'явилось, натиснути на віджет дублювання екрану</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1BRc8YeiEBun44SE6JAUrAZEERntysG4a=w1600" alt="Віджет дублювання екрану">
-
 <ol start="4">
   <li>В новому вікні обрати потрібний пристрій: для першого лекторію це school 1, для другого - school 2</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/11mctrZcyE0pe2AulMztqNLC50Atr15KK=w1600" alt="Вибір пристрою">
-
 <ol start="5">
   <li>Після цього введіть на вашому макбуці код, який з'явиться на екрані проектора</li>
 </ol>
-<p><strong>УВАГА!</strong> Код кожного разу різний</p>
+<div class="callout warn"><span class="label">Увага</span> Код кожного разу різний</div>
 <img src="https://lh3.googleusercontent.com/d/1f-0lB92P8feEo2J0lehNSOgYy-PkmTr1=w1600" alt="Код підключення">
 <img src="https://lh3.googleusercontent.com/d/1A2HCOFLzICSSTcLUiNe_AzfNxFeQET-2=w1600" alt="Введення коду">
-
 <ol start="6">
   <li>В наступному вікні оберіть 1 - "Extended Display" та натисніть 2 - "Extend Display"</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1WRjF8-pDv6wd2gxjHd8waDdCGQLqsEcB=w1600" alt="Extended Display">
-
-<p><strong>УВАГА!</strong> Якщо вікно з кроку 6 не з'явилось, потрібно натиснути на іконку дублювання екрану</p>
+<div class="callout warn"><span class="label">Увага</span> Якщо вікно з кроку 6 не з'явилось, потрібно натиснути на іконку дублювання екрану</div>
 <img src="image.jpg" alt="Іконка дублювання екрану">
 <p>далі натиснути "Change"</p>
 <img src="image_(1).jpg" alt="Кнопка Change">
 <p>та знову повторити пункт 5</p>
-
-<h4>🧑‍🔧 Що має статись:</h4>
-<p>Проектор виводить зображення з Macbook</p>
+<p>Проектор виводить зображення з Macbook:</p>
 <img src="https://lh3.googleusercontent.com/d/1oKERtqIvfaY55GlerlfvQqokUEOvkGkc=w1600" alt="Результат">
 
-<div class="callout done">
-  <strong>✅ Готово, якщо:</strong>
-  <ul>
-    <li>AppleTV та Проєктор увімкнені</li>
-    <li>Зображення з MacBook (заставка) виводиться з проєктора</li>
-  </ul>
+<div class="callout ok">
+  <span class="label">Готово, якщо</span>
+  AppleTV та Проєктор увімкнені, а зображення з MacBook (заставка) виводиться з проєктора.
 </div>
-</details>
 
-<details open>
-<summary>Крок 3: Виведення презентації на екран</summary>
+<!-- ============================================= -->
+<h2 id="step3">Крок 3: Виведення презентації на екран</h2>
 
-<h3>Google Slides</h3>
-<h4>🔍 Що робити:</h4>
+<h3 id="s3-slides">Google Slides</h3>
 <ol>
   <li>Відкрити презентацію</li>
   <li>"Перетягти/перенести" вкладку з презентацією вправо на Extended Display підключеного проектора</li>
   <li>Натиснути "Slideshow"</li>
 </ol>
-<h4>Що має статись:</h4>
-<ul><li>Презентація виведена на екран проєктора</li></ul>
+<p>Що має статись: презентація виведена на екран проєктора.</p>
 <p><strong>📷 Відео інструкція:</strong></p>
 <a class="video-link" href="https://drive.google.com/file/d/1W2sJXzDHFwHkpnkL0Fl--UaiQ7Iv_aus/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
 
-<h3>Power Point</h3>
-<h4>🔍 Що робити:</h4>
+<h3 id="s3-ppt">Power Point</h3>
 <ol>
   <li>Відкрити презентацію</li>
   <li>В меню обрати Slide Show &gt; Play from Start</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1FTqv_mUAAI9H-Z1E9m6LOyNsu5T9Y75r=w1600" alt="Play from Start">
-<h4>Що має статись:</h4>
-<ul><li>На Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик</li></ul>
+<p>Що має статись: на Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик.</p>
 <img src="https://lh3.googleusercontent.com/d/1f6iQDusDVwWTMCpuouUnFTBvzOW-s901=w1600" alt="Результат PowerPoint">
 
-<h3>Keynote</h3>
-<h4>🔍 Що робити:</h4>
+<h3 id="s3-keynote">Keynote</h3>
 <ol>
   <li>Відкрити презентацію</li>
   <li>Натиснути на "Play"</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1YN5C7fXPbD1cN4oKNXfdd48sIC6rlInk=w1600" alt="Play Keynote">
-<h4>Що має статись:</h4>
-<ul><li>На Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик</li></ul>
+<p>Що має статись: на Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик.</p>
 <img src="https://lh3.googleusercontent.com/d/1P8oyzLJycEVXQuNn-pCk6KcNTqcmd5wh=w1600" alt="Результат Keynote">
-</details>
 
-<details open>
-<summary>Крок 4: Підключення клікера</summary>
-
-<h4>🔍 Що робити:</h4>
+<!-- ============================================= -->
+<h2 id="step4">Крок 4: Підключення клікера</h2>
 <ol>
   <li>Знайти клікер в шафі на верхній поличці</li>
   <li>Дістати з нього "хвостик"</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1JR9yTIS2it22jMnEN-dGQvZEwbDqrOl0=w1600" alt="Клікер">
-
 <ol start="3">
   <li>Підключити "хвостик" до MacBook через USB роз'єм USB-Hub</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1muqdPsXMSh755KxkAIkb9OPkJ47jwDbg=w1600" alt="Підключення клікера">
-
 <ol start="4">
   <li>Перевести курсор в праву сторону за межі екрану ноутбуку, ви його побачите на додатковому екрані, Extended Display (той, що виводиться з проектора). Потрібно клікнути один раз на презентацію, щоб він почав працювати на екрані з презентацією</li>
 </ol>
+<p>Що має статись: клікер виконує свої функції.</p>
 
-<h4>Що має статись:</h4>
-<ul><li>Клікер виконує свої функції</li></ul>
-</details>
+<!-- ============================================= -->
+<h2 id="step5">Крок 5: Перевірка звуку та відео в трансляції</h2>
 
-<details open>
-<summary>Крок 5: Перевірка звуку та відео в трансляції</summary>
-
-<h3>Google Meet</h3>
-<h4>🔍 Що робити:</h4>
+<h3 id="s5-meet">Google Meet</h3>
+<div class="schema schema-audio">Мікрофон / гарнітура ─► XENYX Q802USB ─► MacBook (USB Audio CODEC) ─► Google Meet
+Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <ol>
   <li>Під'єднатись до гугл міт</li>
-  <li>Зайти в налаштування аудіо (3 крапки біля мікрофону)
+  <li>Зайти в налаштування аудіо (3 крапки біля мікрофону):
     <ul>
       <li>Як мікрофон обрати - USB Audio CODEC</li>
       <li>Як динамік обрати - School 1 (AirPlay) для першого лекторію, School 2 (AirPlay) - для другого</li>
@@ -388,46 +548,40 @@
 <img src="https://lh3.googleusercontent.com/d/1wGi-4ZFw0AXkHCxO1pWVq436sP-guCR6=w1600" alt="Налаштування аудіо Meet">
 <p>Якщо аудіо налаштовано вірно, то при говорінні в мікрофон біля мікрофону ви побачите анімацію у виді звукової хвилі.</p>
 <ol start="3">
-  <li>Зайти в налаштування відео (стрілка вгору біля відеокамери)
-    <ul><li>Як відеокамеру обрати - Meeting Owl Camera</li></ul>
-  </li>
+  <li>Зайти в налаштування відео (стрілка вгору біля відеокамери): як відеокамеру обрати - Meeting Owl Camera</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1HN8ADju4YWGm2gw8WlV5fsWt7UEsvYy4=w1600" alt="Налаштування відео Meet">
 
-<h3>Zoom</h3>
-<h4>🔍 Що робити:</h4>
+<h3 id="s5-zoom">Zoom</h3>
 <ol>
   <li>Під'єднатись до Zoom</li>
-  <li>Зайти в налаштування аудіо (стрілка вгору біля мікрофону)
+  <li>Зайти в налаштування аудіо (стрілка вгору біля мікрофону):
     <ul>
-      <li>В графі "Select a microphone" обрати - USB Audio CODEC</li>
-      <li>В графі "Select a speaker" обрати - School 1 для першого лекторію, School 2 - для другого</li>
+      <li>"Select a microphone" — USB Audio CODEC</li>
+      <li>"Select a speaker" — School 1 для першого лекторію, School 2 - для другого</li>
     </ul>
   </li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1Q7fE0wtkEPEu3q8p8CmJcwUYBZKhZnBt=w1600" alt="Налаштування аудіо Zoom">
 <ol start="3">
-  <li>Зайти в налаштування відео (стрілка вгору біля відеокамери)
-    <ul><li>Як відеокамеру обрати - Meeting Owl Camera</li></ul>
-  </li>
+  <li>Зайти в налаштування відео (стрілка вгору біля відеокамери): як відеокамеру обрати - Meeting Owl Camera</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1l37K-YuOdfj26DTLjgRzCHa_tT2oWEFu=w1600" alt="Налаштування відео Zoom">
 
-<div class="callout done">
-  <strong>✅ Готово, якщо:</strong> для перевірки потрібно під'єднати ще одного учасника
+<div class="callout ok">
+  <span class="label">Готово, якщо</span>
+  для перевірки потрібно під'єднати ще одного учасника:
   <ul>
     <li>Коли ми говоримо в мікрофон, додатковий учасник чує нас в себе на ноутбуці</li>
     <li>Коли говорить додатковий учасник, ми чуємо його в лекторії на колонках</li>
     <li>В трансляції: і ми, і додатковий учасник бачимо зображення з камери</li>
   </ul>
 </div>
-</details>
 
-<details open>
-<summary>Крок 6: Виведення презентації в онлайн трансляцію</summary>
+<!-- ============================================= -->
+<h2 id="step6">Крок 6: Виведення презентації в онлайн трансляцію</h2>
 
-<h3>Google Meet</h3>
-<h4>Що робити:</h4>
+<h3 id="s6-meet">Google Meet</h3>
 <ol>
   <li>Натиснути на кнопку "Поширити екран"</li>
 </ol>
@@ -444,11 +598,9 @@
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1LvS4IwxCLufhV21xh2LnkRDP3kOPS9Fq=w1600" alt="Опції поширення Meet">
 <ol start="3"><li>Після цього поверніться до розділу "Крок 4: Виведення презентації на екран"</li></ol>
-<h4>Що має статись:</h4>
-<p>Глядачі в онлайні побачать презентацію</p>
+<p>Що має статись: глядачі в онлайні побачать презентацію.</p>
 
-<h3>Zoom</h3>
-<h4>Що робити:</h4>
+<h3 id="s6-zoom">Zoom</h3>
 <ol><li>Натиснути на кнопку "Share"</li></ol>
 <img src="https://lh3.googleusercontent.com/d/1kLO-4KPPJqFeK7NwaMN9XM4loghS9Kkq=w1600" alt="Share Zoom">
 <ol start="2">
@@ -462,30 +614,22 @@
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1vlVq5G5azQ51LRiqNE7PzMvvmLL248vp=w1600" alt="Опції Share Zoom">
 <ol start="3"><li>Після цього поверніться до розділу "Крок 4: Виведення презентації на екран"</li></ol>
-<h4>Що має статись:</h4>
-<p>Глядачі в онлайні побачать презентацію</p>
-</details>
+<p>Що має статись: глядачі в онлайні побачать презентацію.</p>
 
-<hr>
+<!-- ============================================= -->
+<h2 id="shutdown">🔴 Відключення лекторія (в зворотньому порядку!)</h2>
+<div class="callout warn"><span class="label">Важливо</span> Відключаємо в зворотньому порядку до увімкнення!</div>
 
-<details open>
-<summary>🔴 Відключення лекторія (в зворотньому порядку!)</summary>
-
-<div class="callout warn"><strong>ВАЖЛИВО:</strong> Відключаємо в зворотньому порядку до увімкнення!</div>
-
-<h3>1. Вимкнення мікрофонів</h3>
+<h3 id="sd-mics">1. Вимкнення мікрофонів</h3>
 <h4>Ручний мікрофон:</h4>
 <ol>
   <li>Поставити ручний мікрофон в зарядну станцію, таким чином щоб коннектори були з'єднані з коннекторами зарядної станції.<br>
   <code>(Якщо дивитись на мікрофон "фронтально", то його конектори повинні бути з протилежної сторони від "глядача")</code></li>
 </ol>
-
-<p><strong>🖼️ Як це виглядає</strong></p>
 <p><strong>Фронтальна частина</strong></p>
 <img src="telegram-cloud-document-2-5325656951940485919.jpg" alt="Фронтальна частина мікрофону">
 <p><strong>Задня частина</strong></p>
 <img src="telegram-cloud-photo-size-2-5325656952400452493-y.jpg" alt="Задня частина мікрофону">
-
 <p><strong>📷 Відео інструкція:</strong></p>
 <a class="video-link" href="https://drive.google.com/file/d/1BgFFsxv7Kp8yz4Yst4bFMqQP0Ynk8Rbg/view?usp=sharing" target="_blank" rel="noopener">Відео</a>
 
@@ -494,13 +638,12 @@
   <li>Вимкнути за допомогою перемикача On/Off</li>
   <li>Відкрити бічну кришку гарнітури та дістати батарейки та поставити їх на зарядну станцію. Плюс батарейки повинен бути направлений до екрана зарядної станції.</li>
 </ol>
-
 <p><strong>Де знаходиться станція</strong></p>
 <img src="2026-06-25_11.57.56.jpg" alt="Зарядна станція - розташування">
 <p><strong>Зарядна станція і як ставити батарейки</strong></p>
 <img src="telegram-cloud-photo-size-2-5325656952400452513-y.jpg" alt="Зарядна станція">
 
-<h3>2. Вимкнути проектор</h3>
+<h3 id="sd-projector">2. Вимкнути проектор</h3>
 <ol>
   <li>Взяти пульт від проектору з верхньої полиці шафи, та натиснути на клавішу вимкнення з символом ⏻ в напрямку проектора</li>
   <li>Через декілька секунд з'явиться прохання про підтвердження вимкнення</li>
@@ -510,124 +653,236 @@
 
 <h3>3. Закрити MacBook</h3>
 <p>Да, просто закрий макбук)</p>
-</details>
 
-<details>
-<summary>🆘 Що робити, якщо щось не працює</summary>
+<!-- ============================================= -->
+<h2 id="troubleshoot">🆘 Що робити, якщо щось не працює</h2>
 
-<h3>📞 Кого кликати на допомогу</h3>
-<table class="contacts">
-  <tr><td>Інженер:</td><td>+380 63 309 86 21 (Євген Пивовар) — Telegram "@YP_work"</td></tr>
-  <tr><td>Інженер:</td><td>+380 75 290 27 04 (Назар Пустовіт) — Telegram "@nazar_pustovit_work"</td></tr>
-  <tr><td>Інженер:</td><td>+380 50 589 02 01 (Дмитро Мальований)</td></tr>
+<h3 id="t-contacts">📞 Кого кликати на допомогу</h3>
+<table class="t contacts">
+  <tbody>
+    <tr><td>Інженер</td><td>+380 63 309 86 21 (Євген Пивовар) — Telegram "@YP_work"</td></tr>
+    <tr><td>Інженер</td><td>+380 75 290 27 04 (Назар Пустовіт) — Telegram "@nazar_pustovit_work"</td></tr>
+    <tr><td>Інженер</td><td>+380 50 589 02 01 (Дмитро Мальований)</td></tr>
+  </tbody>
 </table>
 
-<h3>2 лекторій: не вмикається проектор</h3>
-<h4>Рішення</h4>
-<p>Зв'язатися з інженером, щоб перезавантажив проектор (виконується в дистанційному режимі).</p>
+<h3 id="t-quick">Швидка таблиця</h3>
+<table class="t">
+  <thead><tr><th>Проблема</th><th>Перша дія</th></tr></thead>
+  <tbody>
+    <tr><td>2 лекторій: не вмикається проектор</td><td>Зв'язатися з інженером, щоб перезавантажив проектор (дистанційно).</td></tr>
+    <tr><td>2 лекторій: проектор увімкнувся, але не виводить зображення / шум / не ловить AppleTV</td><td>Перезапустити Kramer (відкрутити кабель живлення, після вимкнення підключити і закрутити знову), потім перезапустити AppleTV.</td></tr>
+    <tr><td>Відсутній звук з колонок</td><td>Settings &gt; Sound: Input — USB Audio CODEC, Output — School 1/2 AirPlay.</td></tr>
+    <tr><td>Онлайн не чує офлайн</td><td>Перевірити mute на мікрофонах (гарнітура — Mute 2 сек, ручний — перемикач з червоного на зелений), налаштування Zoom/Meet, Settings &gt; Sound &gt; Input.</td></tr>
+    <tr><td>Офлайн не чує онлайн</td><td>Перевірити налаштування Zoom/Meet і Settings &gt; Sound &gt; Output = School 1/2 AirPlay.</td></tr>
+    <tr><td>Не працює AirPlay/AppleTV/Проектор</td><td>Перезавантажити проектор, потім AppleTV.</td></tr>
+    <tr><td>Не йде звук з презентації в офлайн</td><td>Settings &gt; Sound &gt; Output = School 1/2 AirPlay.</td></tr>
+    <tr><td>Не йде звук з презентації в онлайн</td><td>Зупинити Шерінг екрану, повторити Крок 6, перевірити "Also share system audio" / "Share sound".</td></tr>
+    <tr><td>Не підключається камера</td><td>Перевірити живлення і окремий Type-C роз'єм, налаштування в Zoom/Meet.</td></tr>
+    <tr><td>Не працює клікер</td><td>Перевірити підключення через USB-Hub, клікнути на презентацію на Extended Display.</td></tr>
+    <tr><td>Проєктор вивів меню</td><td>Пультом обрати потрібний HDMI-вхід (AppleTV, зазвичай HDMI 3) і натиснути Enter.</td></tr>
+  </tbody>
+</table>
 
-<h3>2 лекторій: проектор увімкнувся, але не виводить зображення / виводить шум / не ловить сигнал від AppleTV</h3>
-<p><strong>Приклад:</strong></p>
-<img src="https://lh3.googleusercontent.com/d/1MXpxfdCTL9hf13myFHoBFHdB7ra7uYNw=w1600" alt="Приклад шуму">
-<h4>Рішення</h4>
-<ol>
-  <li>Перезапустити Kramer</li>
-  <li>Відкрутити кабель живлення</li>
-  <li>Від'єднати кабель живлення</li>
-  <li>Після того як Kramer вимкнеться, під'єднати кабель живлення</li>
-  <li>Закрутити кабель живлення</li>
-  <li>Перезапустити AppleTV</li>
-</ol>
-<p><strong>📷 Відеоінструкція:</strong></p>
-<a class="video-link" href="https://drive.google.com/file/d/1k7oJVMqRLjJYGt9bpnhBSDL7BXAzih8x/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
+<div class="callout info">
+  <span class="label">Детальніше</span>
+  Повні покрокові інструкції для кожної проблеми — у відповідних розділах вище (Крок 1–6).
+</div>
 
-<h3>Відсутній звук з колонок</h3>
-<h4>Рішення</h4>
-<p>Перевірити Settings &gt; Sound &gt; Input та Output.</p>
-<p>Правильні налаштування:</p>
-<ol>
-  <li>Input - USB Audio CODEC для обох лекторіїв</li>
-  <li>Output:
-    <ul>
-      <li>School 1 AirPlay - для першого лекторію</li>
-      <li>School 2 AirPlay - для другого лекторію</li>
-    </ul>
-  </li>
-</ol>
+<hr class="soft">
+<p style="color:var(--muted); font-size:12px; text-align:center;">Lectorium · Верхній Вал · Гайд оператора. Чеклісти зберігаються в браузері.</p>
 
-<h3>Онлайн не чує офлайн</h3>
-<h4>Рішення</h4>
-<ol>
-  <li>Перевірити, чи не вимкнений звук на самих мікрофонах</li>
-  <li>Гарнітура: натиснути на клавішу Mute на 2 секунди</li>
-  <li>Ручний мікрофон: потрібно підняти боковий перемикач з червоного на зелений (Дивись Крок 3)</li>
-  <li>Перевірити, чи правильні налаштування обрані в Zoom/Google Meet (Дивись Крок 5)</li>
-  <li>Перевірити Settings &gt; Sound &gt; Input</li>
-  <li>Правильні налаштування: Input - USB Audio CODEC для обох лекторіїв</li>
-  <li>(Дивись Крок 4 &gt; Підключення звуку)</li>
-  <li>Перевірити наявність візуального сигналу в Settings &gt; Sound &gt; Input &gt; Input Level, коли говорите в мікрофон</li>
-  <li>(Дивись Крок 4 &gt; Підключення звуку)</li>
-  <li>З Кроку 4 &gt; Підключення звуку &gt; Пункт 4: від'єднати кабель, почекати декілька секунд, підключити його знову, повторити пункти 1-4</li>
-</ol>
+</main>
+</div>
+<a class="back-top" href="#checklist" aria-label="Повернутися нагору" title="Повернутися нагору">↑</a>
 
-<h3>Офлайн не чує онлайн</h3>
-<h4>Рішення</h4>
-<ol>
-  <li>Перевірити, чи правильні налаштування обрані в Zoom/Google Meet (Дивись Крок 5)</li>
-  <li>Перевірити Settings &gt; Sound &gt; Output</li>
-  <li>Повинно бути обрано: School 1 AirPlay для першого лекторію, School 2 AirPlay для другого лекторію</li>
-</ol>
+<script>
+  // Checklist persistence
+  (function() {
+    function key(input) {
+      const ul = input.closest('ul.checklist');
+      const group = ul ? ul.dataset.key || 'default' : 'default';
+      return 'lectorium:' + group + ':' + input.id;
+    }
+    document.querySelectorAll('.checklist input[type="checkbox"]').forEach(function(cb) {
+      try { if (localStorage.getItem(key(cb)) === '1') cb.checked = true; } catch (e) {}
+      cb.addEventListener('change', function() {
+        try {
+          if (cb.checked) localStorage.setItem(key(cb), '1');
+          else localStorage.removeItem(key(cb));
+        } catch (e) {}
+      });
+    });
+  })();
 
-<h3>Не працює AirPlay/AppleTV/Проектор</h3>
-<h4>Рішення</h4>
-<ol>
-  <li>Перезавантажити проектор</li>
-  <li>Перезавантажити AppleTV</li>
-</ol>
+  // Sidebar navigation: grouping, search, scrollspy, mobile disclosure
+  (function() {
+    const sidebar = document.querySelector('.sidebar');
+    const nav = document.querySelector('.sidebar nav');
+    const search = document.querySelector('.nav-search');
+    const empty = document.querySelector('.nav-empty');
+    const menuToggle = document.querySelector('.nav-menu-toggle');
+    if (!sidebar || !nav) return;
 
-<h3>Не йде звук з презентації в офлайн</h3>
-<h4>Рішення</h4>
-<p>Перевірити Settings &gt; Sound &gt; Output.</p>
-<p>Повинно бути обрано:</p>
-<ul>
-  <li>School 1 AirPlay для першого лекторію</li>
-  <li>School 2 AirPlay для другого лекторію</li>
-</ul>
+    const storagePrefix = 'lectorium:nav-group:';
+    const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
 
-<h3>Не йде звук з презентації в онлайн</h3>
-<h4>Рішення</h4>
-<ol>
-  <li>Зупинити "Шерінг екрану"</li>
-  <li>Ще раз повторити Крок 6</li>
-  <li><strong>Обов'язково</strong> перевірити, чи стоїть галочка біля: Google Meet - Also share computer audio; Zoom - Share sound</li>
-</ol>
+    function slugFromHref(link) { return (link.getAttribute('href') || '').replace(/^#/, '') || 'top'; }
 
-<h3>Не підключається Камера</h3>
-<h4>Рішення</h4>
-<ol>
-  <li>Перевірити кабель живлення, чи підключений він до розетки</li>
-  <li>Перевірити, чи підключена камера до MacBook через <strong>ОКРЕМИЙ</strong> Type-C роз'єм</li>
-  <li>В GoogleMeet/Zoom перевірити, чи правильно обрані налаштування (Дивись Крок 5)</li>
-</ol>
+    function buildGroups() {
+      const fragment = document.createDocumentFragment();
+      let currentGroup = null, currentItems = null;
 
-<h3>Не працює клікер</h3>
-<h4>Рішення</h4>
-<ol>
-  <li>Перевірити, чи підключений він до MacBook через USB-Hub</li>
-  <li>Перевести курсор на Extended Display (той, що виводиться з проектора) та клікнути один раз на презентацію, щоб він почав працювати на екрані з презентацією</li>
-</ol>
+      links.forEach(function(link) {
+        if (link.classList.contains('section-head') || !currentGroup) {
+          const groupId = slugFromHref(link);
+          currentGroup = document.createElement('div');
+          currentGroup.className = 'nav-group';
+          currentGroup.dataset.group = groupId;
 
-<h3>Проєктор вивів меню</h3>
-<p><strong>Приклад:</strong></p>
-<img src="https://lh3.googleusercontent.com/d/16ps0TA4DR3_zyAq72zOkxWcP3_GmtDC6=w1600" alt="Меню проєктора">
-<h4>Рішення</h4>
-<ol>
-  <li>Взяти пульт від проєктора</li>
-  <li>За допомогою стрілочок обрати потрібний пристрій, що виводить AppleTV, та натиснути на середню кнопку "Enter"</li>
-</ol>
-<p>В даному випадку це HDMI 3</p>
-<img src="https://lh3.googleusercontent.com/d/1Hgy57695_RmCsdKsBu2OqHoGLrdf44EC=w1600" alt="HDMI 3">
-</details>
+          const head = document.createElement('div');
+          head.className = 'nav-group-head';
 
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'nav-collapse';
+          button.setAttribute('aria-label', 'Згорнути розділ ' + link.textContent.trim());
+          button.setAttribute('aria-expanded', 'true');
+
+          currentItems = document.createElement('div');
+          currentItems.className = 'nav-group-items';
+          currentItems.id = 'nav-group-' + groupId;
+          button.setAttribute('aria-controls', currentItems.id);
+
+          head.appendChild(link);
+          head.appendChild(button);
+          currentGroup.appendChild(head);
+          currentGroup.appendChild(currentItems);
+          fragment.appendChild(currentGroup);
+
+          try {
+            if (localStorage.getItem(storagePrefix + groupId) === 'collapsed') {
+              setGroupCollapsed(currentGroup, true, false);
+            }
+          } catch (e) {}
+
+          const groupForButton = currentGroup;
+          button.addEventListener('click', function() {
+            const nextCollapsed = !groupForButton.classList.contains('is-collapsed');
+            setGroupCollapsed(groupForButton, nextCollapsed, true);
+          });
+        } else if (currentItems) {
+          currentItems.appendChild(link);
+        }
+      });
+
+      nav.replaceChildren(fragment);
+    }
+
+    function setGroupCollapsed(group, collapsed, persist) {
+      const button = group.querySelector('.nav-collapse');
+      const groupId = group.dataset.group;
+      group.classList.toggle('is-collapsed', collapsed);
+      if (button) button.setAttribute('aria-expanded', String(!collapsed));
+      if (!persist) return;
+      try {
+        if (collapsed) localStorage.setItem(storagePrefix + groupId, 'collapsed');
+        else localStorage.removeItem(storagePrefix + groupId);
+      } catch (e) {}
+    }
+
+    function normalizeText(value) { return value.toLocaleLowerCase('uk-UA').trim(); }
+
+    function applyFilter() {
+      const query = normalizeText(search ? search.value : '');
+      let visibleGroups = 0;
+      sidebar.classList.toggle('nav-searching', Boolean(query));
+
+      nav.querySelectorAll('.nav-group').forEach(function(group) {
+        let hasVisibleLink = false;
+        const groupLinks = Array.from(group.querySelectorAll('a'));
+        groupLinks.forEach(function(link) {
+          const isMatch = !query || normalizeText(link.textContent).includes(query);
+          const isHead = link.classList.contains('section-head');
+          const subMatches = groupLinks.some(function(item) {
+            return !item.classList.contains('section-head') && normalizeText(item.textContent).includes(query);
+          });
+          const showLink = !query || isMatch || (isHead && subMatches);
+          link.classList.toggle('is-hidden', !showLink);
+          hasVisibleLink = hasVisibleLink || showLink;
+        });
+        group.classList.toggle('is-hidden', !hasVisibleLink);
+        if (hasVisibleLink) visibleGroups += 1;
+      });
+
+      if (empty) empty.classList.toggle('is-visible', visibleGroups === 0);
+    }
+
+    function setActiveLink(hash) {
+      if (!hash) return;
+      const active = nav.querySelector('a[href="' + hash + '"]');
+      if (!active) return;
+      nav.querySelectorAll('a.is-active').forEach(function(link) { link.classList.remove('is-active'); });
+      active.classList.add('is-active');
+      const group = active.closest('.nav-group');
+      if (group && group.classList.contains('is-collapsed') && !sidebar.classList.contains('nav-searching')) {
+        setGroupCollapsed(group, false, false);
+      }
+    }
+
+    function initScrollspy() {
+      if (!('IntersectionObserver' in window)) { setActiveLink(window.location.hash || '#checklist'); return; }
+      const headings = links.map(function(link) { return document.getElementById(slugFromHref(link)); }).filter(Boolean);
+      const visible = new Map();
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) visible.set(entry.target.id, entry.target);
+          else visible.delete(entry.target.id);
+        });
+        const current = Array.from(visible.values()).sort(function(a, b) {
+          return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        })[0];
+        if (current) setActiveLink('#' + current.id);
+      }, { rootMargin: '-18% 0px -70% 0px', threshold: [0, 0.2, 0.6] });
+      headings.forEach(function(heading) { observer.observe(heading); });
+      setActiveLink(window.location.hash || '#checklist');
+    }
+
+    buildGroups();
+    if (search) search.addEventListener('input', applyFilter);
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function() {
+        const isOpen = sidebar.classList.toggle('nav-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    function scrollToAnchor(hash, sourceLink) {
+      if (!hash || !hash.startsWith('#') || hash.length < 2) return false;
+      const el = document.getElementById(hash.slice(1));
+      if (!el) return false;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      try { history.replaceState(null, '', hash); } catch (e) {}
+      setActiveLink(hash);
+      if (sourceLink && nav.contains(sourceLink) && window.matchMedia('(max-width: 880px)').matches && menuToggle) {
+        sidebar.classList.remove('nav-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+      return true;
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        const id = a.getAttribute('href');
+        if (!id || !id.startsWith('#')) return;
+        if (scrollToAnchor(id, a)) e.preventDefault();
+      });
+    });
+
+    applyFilter();
+    initScrollspy();
+  })();
+</script>
 </body>
 </html>
