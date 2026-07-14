@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lectorium Guide — Short Version</title>
+<style>
+  :root {
+    --text: #2f2f2f;
+    --muted: #6b6b6b;
+    --border: #e3e3e1;
+    --bg-soft: #f7f7f5;
+    --accent: #c0392b;
+    --ok: #1e7d3c;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #ffffff;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.55;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.5em 1.25em 4em;
+  }
+  h1 { font-size: 1.7rem; margin: 1.6em 0 0.4em; line-height: 1.25; }
+  h1:first-of-type { margin-top: 0; }
+  h2 { font-size: 1.3rem; margin: 1.2em 0 0.3em; }
+  h3 { font-size: 1.1rem; margin: 1em 0 0.3em; }
+  h4 { font-size: 1rem; margin: 0.9em 0 0.25em; color: var(--muted); }
+  p { margin: 0.5em 0; }
+  ul, ol { margin: 0.4em 0; padding-left: 1.4em; }
+  li { margin: 0.2em 0; }
+  a { color: #1a5fb4; }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 0.6em 0;
+    display: block;
+  }
+  code { background: var(--bg-soft); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.92em; }
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.6em;
+  }
+  details {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0.9em 0;
+    padding: 0.15em 1em 0.9em;
+    background: #fff;
+  }
+  details > summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0.7em 0;
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before {
+    content: "▸ ";
+    color: var(--muted);
+  }
+  details[open] > summary::before {
+    content: "▾ ";
+  }
+  .callout {
+    border-radius: 8px;
+    padding: 0.7em 1em;
+    margin: 0.7em 0;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+  }
+  .callout.done { border-color: #bfe3c9; background: #f2faf4; }
+  .callout.warn { border-color: #f0cfc9; background: #fbf1ef; }
+  .video-link {
+    display: inline-block;
+    margin: 0.5em 0;
+    padding: 0.5em 0.9em;
+    border-radius: 8px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .video-link:before { content: "▶ "; }
+  .contacts { border-collapse: collapse; width: 100%; margin: 0.6em 0; }
+  .contacts td { padding: 0.35em 0.6em 0.35em 0; vertical-align: top; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Lectorium Guide — Short Version</h1>
+
+<details open>
+<summary>Передстартовий чекліст</summary>
+
+<h2>Живлення</h2>
+<p>Усі наступні прилади підключені до живлення та мають світлову індикацію:</p>
+<ul>
+  <li>Kramer 20-port audio matrix (комутатор звуку)</li>
+  <li>Toa Multichannel Power Amplifier (підсилювач звуку)</li>
+  <li>4К HDMI 4х4 Matrix Switcher (комутатор відео)</li>
+  <li>Мікрофонні бази</li>
+</ul>
+
+<h2>Мікрофони</h2>
+<ol>
+  <li>Ручні мікрофони стоять на зарядній станції, а зарядна станція подає світловий сигнал</li>
+  <li>Мікрофони увімкнені</li>
+</ol>
+
+<h2>MacBook</h2>
+<ol>
+  <li>Увімкнений і розблокований (Пароль: Qwerty)</li>
+  <li>До нього підключений USB-Hub</li>
+  <li>Підключений до живлення через USB-Hub і має індикацію заряджання вгорі екрану на позначці батареї</li>
+  <li>Підключений до Wi-Fi "Event_5Ghz" (Пароль GenesisTech)</li>
+</ol>
+
+<h2>AppleTV / проєктор</h2>
+<ol>
+  <li>AppleTV увімкнений та має світлову індикацію</li>
+  <li>Проєктор увімкнений та виводить стартове зображення Apple TV</li>
+  <li>MacBook підключений до AppleTV</li>
+  <li>Зображення виводиться на екран як Extended Display</li>
+  <li>В Settings &gt; Sound &gt; Output &gt; Обрано
+    <ul>
+      <li>School 1 AirPlay - для першого лекторію</li>
+      <li>School 2 AirPlay - для другого лекторію</li>
+    </ul>
+  </li>
+</ol>
+
+<h2>Клікер</h2>
+<ul>
+  <li>Підключений до USB-Hub через USB роз'єм</li>
+  <li>Виконує свої функції</li>
+</ul>
+
+<h2>XENYX Q802USB Мікшерний пульт (звук з мікрофонів в MacBook)</h2>
+<ol>
+  <li>Підключений до MacBook через USB роз'єм USB-Hub</li>
+  <li>В Settings &gt; Sound &gt; Input обрано USB Audio CODEC</li>
+  <li>В Settings &gt; Sound &gt; Input Level є графічний сигнал коли розмовляєш в мікрофон</li>
+</ol>
+
+<h2>Камера</h2>
+<ol>
+  <li>Підключена до живлення</li>
+  <li>Підключена до Macbook через окремий Type-C роз'єм</li>
+  <li>Має світлову індикацію</li>
+</ol>
+
+<h2>Zoom/Google Meet</h2>
+<p>Обрані потрібні мікрофон, колонки та камера:</p>
+<ul>
+  <li>Мікрофон - USB Audio CODEC</li>
+  <li>Колонки:
+    <ul>
+      <li>School 1 AirPlay - для першого лекторію</li>
+      <li>School 2 AirPlay - для другого лекторію</li>
+    </ul>
+  </li>
+  <li>Камера - Meeting Owl Camera</li>
+</ul>
+
+<h2>Тестовий учасник у Meet / Zoom</h2>
+<p>Зайти в Zoom або Google Meet (можна зайти зі свого ноутбуку) та перевірити:</p>
+<ul>
+  <li>чи є звук:
+    <ul>
+      <li>говориш в мікрофон — тебе чути з твого ноутбуку</li>
+      <li>говориш в свій ноутбук - тебе чути з колонок лекторію</li>
+    </ul>
+  </li>
+  <li>чи є відео з камери</li>
+</ul>
+</details>
+
+<hr>
+
+<details open>
+<summary>Крок 1: Увімкнення мікрофонів</summary>
+
+<h3>🔍 Що робити:</h3>
+
+<h4>Гарнітура ("Петлічка"):</h4>
+
+<p><strong>Як виглядає:</strong></p>
+<img src="photo_5217535802173234342_w.jpg" alt="Гарнітура">
+
+<ol>
+  <li>Відкрити бічну кришку гарнітури. Затиснути на бічну кнопку та підняти кришку догори</li>
+</ol>
+<img src="photo_5217535802173234339_w_(1).jpg" alt="Відкриття кришки гарнітури">
+
+<ol start="2">
+  <li>Вставити батареї згідно підказок з внутрішньої сторони кришки та на самих батареях (+ до +, - до -)</li>
+</ol>
+<img src="photo_5217535802173234337_w.jpg" alt="Батареї гарнітури">
+
+<ol start="3">
+  <li>Увімкнути гарнітуру за допомогою перемикача Off/On</li>
+</ol>
+<img src="photo_5217535802173234336_w.jpg" alt="Перемикач гарнітури">
+
+<p><strong>Увімкнена гарнітура:</strong></p>
+<img src="photo_5217535802173234335_w.jpg" alt="Увімкнена гарнітура">
+
+<p><strong>📷 Відео інструкція:</strong></p>
+<a class="video-link" href="https://drive.google.com/file/d/1UBnYUlKe1vTL8hQPFfu1CObrW_9oD_hz/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
+
+<h4>Ручний мікрофон:</h4>
+<p>Взяти мікрофон зі станції яка знаходиться в Lectorium1 в технічному шкафу. <strong>Зелений</strong> мікрофон для Lectorium1 і <strong>Синій</strong> для Lectorium2.</p>
+
+<p><strong>Як виглядає мікрофон:</strong> (Приклад: мікрофон Lectorium2)</p>
+<img src="IMG_2394.jpg" alt="Ручний мікрофон">
+
+<p><strong>Увімкнений мікрофон</strong></p>
+<p>Увімкнений мікрофон має червону індикацію на нижній частині мікрофону, поруч з перемикачем "on/off". Якщо лампочка не горить, перемкни перемикач.</p>
+
+<div class="callout done">
+  <strong>✅ Готово, якщо:</strong> і гарнітура, і ручний мікрофон мають мати світлову індикацію. Коли кажеш щось в мікрофон, йде в Lectorium.
+</div>
+</details>
+
+<details open>
+<summary>Крок 2: Запуск та підключення до пристроїв для виведення зображення</summary>
+
+<h3>Увімкнути Проєктор</h3>
+
+<h4>🔍 Що робити:</h4>
+<p>Взяти пульт білого кольору, що знаходиться на верхній поличці шафи та натиснути кнопку з символом ⏻ направляючи його на проєктор.</p>
+
+<p><strong>🖼️ Як виглядає пульт:</strong></p>
+<img src="IMG_2396.jpg" alt="Пульт проєктора">
+
+<h4>🧑‍🔧 Що має статись:</h4>
+<p>Проєктор має подати звуковий сигнал (піщання), увімкнутись та вивести зображення. Час очікування +- 10 секунд.</p>
+
+<p><strong>📷 Відео інструкція:</strong></p>
+<a class="video-link" href="https://drive.google.com/file/d/1wFhcw0s6dYTFLnWnpMW7UEWhKMPiCloK/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
+
+<div class="callout warn">
+  <strong>⚠️ LECTORIUM 2: НЕ ЗАПУСКАЄТЬСЯ ПРОЕКТОР</strong>
+  <ol><li>Напишіть Техніку щоб він перезавантажив смарт розетку</li></ol>
+</div>
+
+<div class="callout warn">
+  <strong>⚠️ LECTORIUM 2: ПРОЕКТОР ВИДАЄ СІРИЙ ШУМ</strong>
+  <p>З лівої внутрішньої частини технічного шкафа висить пристрій Kramer. В нього є кабель живлення, який треба відкрутити, а потім витягнути. Після 5-секундного очікування можна підключати кабель.</p>
+</div>
+
+<h3>Підключення до проєктора</h3>
+
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Відкрити та увімкнути MacBook локації, що лежить на столику біля шафи (Пароль: Qwerty)</li>
+  <li>Відкрити меню елементів керування через віджет у верхньому правому кутку екрану, біля дати та часу.</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1_tK_9nUE3qftSw-3rtIUdtaqIgL9Tp8v=w1600" alt="Меню елементів керування">
+
+<ol start="3">
+  <li>У меню, що з'явилось, натиснути на віджет дублювання екрану</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1BRc8YeiEBun44SE6JAUrAZEERntysG4a=w1600" alt="Віджет дублювання екрану">
+
+<ol start="4">
+  <li>В новому вікні обрати потрібний пристрій: для першого лекторію це school 1, для другого - school 2</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/11mctrZcyE0pe2AulMztqNLC50Atr15KK=w1600" alt="Вибір пристрою">
+
+<ol start="5">
+  <li>Після цього введіть на вашому макбуці код, який з'явиться на екрані проектора</li>
+</ol>
+<p><strong>УВАГА!</strong> Код кожного разу різний</p>
+<img src="https://lh3.googleusercontent.com/d/1f-0lB92P8feEo2J0lehNSOgYy-PkmTr1=w1600" alt="Код підключення">
+<img src="https://lh3.googleusercontent.com/d/1A2HCOFLzICSSTcLUiNe_AzfNxFeQET-2=w1600" alt="Введення коду">
+
+<ol start="6">
+  <li>В наступному вікні оберіть 1 - "Extended Display" та натисніть 2 - "Extend Display"</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1WRjF8-pDv6wd2gxjHd8waDdCGQLqsEcB=w1600" alt="Extended Display">
+
+<p><strong>УВАГА!</strong> Якщо вікно з кроку 6 не з'явилось, потрібно натиснути на іконку дублювання екрану</p>
+<img src="image.jpg" alt="Іконка дублювання екрану">
+<p>далі натиснути "Change"</p>
+<img src="image_(1).jpg" alt="Кнопка Change">
+<p>та знову повторити пункт 5</p>
+
+<h4>🧑‍🔧 Що має статись:</h4>
+<p>Проектор виводить зображення з Macbook</p>
+<img src="https://lh3.googleusercontent.com/d/1oKERtqIvfaY55GlerlfvQqokUEOvkGkc=w1600" alt="Результат">
+
+<div class="callout done">
+  <strong>✅ Готово, якщо:</strong>
+  <ul>
+    <li>AppleTV та Проєктор увімкнені</li>
+    <li>Зображення з MacBook (заставка) виводиться з проєктора</li>
+  </ul>
+</div>
+</details>
+
+<details open>
+<summary>Крок 3: Виведення презентації на екран</summary>
+
+<h3>Google Slides</h3>
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Відкрити презентацію</li>
+  <li>"Перетягти/перенести" вкладку з презентацією вправо на Extended Display підключеного проектора</li>
+  <li>Натиснути "Slideshow"</li>
+</ol>
+<h4>Що має статись:</h4>
+<ul><li>Презентація виведена на екран проєктора</li></ul>
+<p><strong>📷 Відео інструкція:</strong></p>
+<a class="video-link" href="https://drive.google.com/file/d/1W2sJXzDHFwHkpnkL0Fl--UaiQ7Iv_aus/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
+
+<h3>Power Point</h3>
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Відкрити презентацію</li>
+  <li>В меню обрати Slide Show &gt; Play from Start</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1FTqv_mUAAI9H-Z1E9m6LOyNsu5T9Y75r=w1600" alt="Play from Start">
+<h4>Що має статись:</h4>
+<ul><li>На Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик</li></ul>
+<img src="https://lh3.googleusercontent.com/d/1f6iQDusDVwWTMCpuouUnFTBvzOW-s901=w1600" alt="Результат PowerPoint">
+
+<h3>Keynote</h3>
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Відкрити презентацію</li>
+  <li>Натиснути на "Play"</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1YN5C7fXPbD1cN4oKNXfdd48sIC6rlInk=w1600" alt="Play Keynote">
+<h4>Що має статись:</h4>
+<ul><li>На Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик</li></ul>
+<img src="https://lh3.googleusercontent.com/d/1P8oyzLJycEVXQuNn-pCk6KcNTqcmd5wh=w1600" alt="Результат Keynote">
+</details>
+
+<details open>
+<summary>Крок 4: Підключення клікера</summary>
+
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Знайти клікер в шафі на верхній поличці</li>
+  <li>Дістати з нього "хвостик"</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1JR9yTIS2it22jMnEN-dGQvZEwbDqrOl0=w1600" alt="Клікер">
+
+<ol start="3">
+  <li>Підключити "хвостик" до MacBook через USB роз'єм USB-Hub</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1muqdPsXMSh755KxkAIkb9OPkJ47jwDbg=w1600" alt="Підключення клікера">
+
+<ol start="4">
+  <li>Перевести курсор в праву сторону за межі екрану ноутбуку, ви його побачите на додатковому екрані, Extended Display (той, що виводиться з проектора). Потрібно клікнути один раз на презентацію, щоб він почав працювати на екрані з презентацією</li>
+</ol>
+
+<h4>Що має статись:</h4>
+<ul><li>Клікер виконує свої функції</li></ul>
+</details>
+
+<details open>
+<summary>Крок 5: Перевірка звуку та відео в трансляції</summary>
+
+<h3>Google Meet</h3>
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Під'єднатись до гугл міт</li>
+  <li>Зайти в налаштування аудіо (3 крапки біля мікрофону)
+    <ul>
+      <li>Як мікрофон обрати - USB Audio CODEC</li>
+      <li>Як динамік обрати - School 1 (AirPlay) для першого лекторію, School 2 (AirPlay) - для другого</li>
+    </ul>
+  </li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1wGi-4ZFw0AXkHCxO1pWVq436sP-guCR6=w1600" alt="Налаштування аудіо Meet">
+<p>Якщо аудіо налаштовано вірно, то при говорінні в мікрофон біля мікрофону ви побачите анімацію у виді звукової хвилі.</p>
+<ol start="3">
+  <li>Зайти в налаштування відео (стрілка вгору біля відеокамери)
+    <ul><li>Як відеокамеру обрати - Meeting Owl Camera</li></ul>
+  </li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1HN8ADju4YWGm2gw8WlV5fsWt7UEsvYy4=w1600" alt="Налаштування відео Meet">
+
+<h3>Zoom</h3>
+<h4>🔍 Що робити:</h4>
+<ol>
+  <li>Під'єднатись до Zoom</li>
+  <li>Зайти в налаштування аудіо (стрілка вгору біля мікрофону)
+    <ul>
+      <li>В графі "Select a microphone" обрати - USB Audio CODEC</li>
+      <li>В графі "Select a speaker" обрати - School 1 для першого лекторію, School 2 - для другого</li>
+    </ul>
+  </li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1Q7fE0wtkEPEu3q8p8CmJcwUYBZKhZnBt=w1600" alt="Налаштування аудіо Zoom">
+<ol start="3">
+  <li>Зайти в налаштування відео (стрілка вгору біля відеокамери)
+    <ul><li>Як відеокамеру обрати - Meeting Owl Camera</li></ul>
+  </li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1l37K-YuOdfj26DTLjgRzCHa_tT2oWEFu=w1600" alt="Налаштування відео Zoom">
+
+<div class="callout done">
+  <strong>✅ Готово, якщо:</strong> для перевірки потрібно під'єднати ще одного учасника
+  <ul>
+    <li>Коли ми говоримо в мікрофон, додатковий учасник чує нас в себе на ноутбуці</li>
+    <li>Коли говорить додатковий учасник, ми чуємо його в лекторії на колонках</li>
+    <li>В трансляції: і ми, і додатковий учасник бачимо зображення з камери</li>
+  </ul>
+</div>
+</details>
+
+<details open>
+<summary>Крок 6: Виведення презентації в онлайн трансляцію</summary>
+
+<h3>Google Meet</h3>
+<h4>Що робити:</h4>
+<ol>
+  <li>Натиснути на кнопку "Поширити екран"</li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1S00z18R0If4heQo3x5KpBampm_NwOsfL=w1600" alt="Поширити екран Meet">
+<ol start="2">
+  <li>У вікні, що з'явилося, обрати:
+    <ul>
+      <li>Entire Screen</li>
+      <li>Screen 2</li>
+      <li><strong>Обов'язково</strong> обрати "Also share system audio", якщо у вас є відео та звук в презентації</li>
+      <li>Share</li>
+    </ul>
+  </li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1LvS4IwxCLufhV21xh2LnkRDP3kOPS9Fq=w1600" alt="Опції поширення Meet">
+<ol start="3"><li>Після цього поверніться до розділу "Крок 4: Виведення презентації на екран"</li></ol>
+<h4>Що має статись:</h4>
+<p>Глядачі в онлайні побачать презентацію</p>
+
+<h3>Zoom</h3>
+<h4>Що робити:</h4>
+<ol><li>Натиснути на кнопку "Share"</li></ol>
+<img src="https://lh3.googleusercontent.com/d/1kLO-4KPPJqFeK7NwaMN9XM4loghS9Kkq=w1600" alt="Share Zoom">
+<ol start="2">
+  <li>У вікні, що з'явилося, обрати:
+    <ul>
+      <li>Desktop 2</li>
+      <li><strong>Обов'язково</strong> поставити галочку біля "Share sound", якщо у вас є відео та звук в презентації</li>
+      <li>Share</li>
+    </ul>
+  </li>
+</ol>
+<img src="https://lh3.googleusercontent.com/d/1vlVq5G5azQ51LRiqNE7PzMvvmLL248vp=w1600" alt="Опції Share Zoom">
+<ol start="3"><li>Після цього поверніться до розділу "Крок 4: Виведення презентації на екран"</li></ol>
+<h4>Що має статись:</h4>
+<p>Глядачі в онлайні побачать презентацію</p>
+</details>
+
+<hr>
+
+<details open>
+<summary>🔴 Відключення лекторія (в зворотньому порядку!)</summary>
+
+<div class="callout warn"><strong>ВАЖЛИВО:</strong> Відключаємо в зворотньому порядку до увімкнення!</div>
+
+<h3>1. Вимкнення мікрофонів</h3>
+<h4>Ручний мікрофон:</h4>
+<ol>
+  <li>Поставити ручний мікрофон в зарядну станцію, таким чином щоб коннектори були з'єднані з коннекторами зарядної станції.<br>
+  <code>(Якщо дивитись на мікрофон "фронтально", то його конектори повинні бути з протилежної сторони від "глядача")</code></li>
+</ol>
+
+<p><strong>🖼️ Як це виглядає</strong></p>
+<p><strong>Фронтальна частина</strong></p>
+<img src="telegram-cloud-document-2-5325656951940485919.jpg" alt="Фронтальна частина мікрофону">
+<p><strong>Задня частина</strong></p>
+<img src="telegram-cloud-photo-size-2-5325656952400452493-y.jpg" alt="Задня частина мікрофону">
+
+<p><strong>📷 Відео інструкція:</strong></p>
+<a class="video-link" href="https://drive.google.com/file/d/1BgFFsxv7Kp8yz4Yst4bFMqQP0Ynk8Rbg/view?usp=sharing" target="_blank" rel="noopener">Відео</a>
+
+<h4>Гарнітура:</h4>
+<ol>
+  <li>Вимкнути за допомогою перемикача On/Off</li>
+  <li>Відкрити бічну кришку гарнітури та дістати батарейки та поставити їх на зарядну станцію. Плюс батарейки повинен бути направлений до екрана зарядної станції.</li>
+</ol>
+
+<p><strong>Де знаходиться станція</strong></p>
+<img src="2026-06-25_11.57.56.jpg" alt="Зарядна станція - розташування">
+<p><strong>Зарядна станція і як ставити батарейки</strong></p>
+<img src="telegram-cloud-photo-size-2-5325656952400452513-y.jpg" alt="Зарядна станція">
+
+<h3>2. Вимкнути проектор</h3>
+<ol>
+  <li>Взяти пульт від проектору з верхньої полиці шафи, та натиснути на клавішу вимкнення з символом ⏻ в напрямку проектора</li>
+  <li>Через декілька секунд з'явиться прохання про підтвердження вимкнення</li>
+  <li>Натиснути на клавішу вимкнення ще раз</li>
+  <li>Покласти пульт на верхню полицю в шафі (туди, звідки брали, дивись Крок 2)</li>
+</ol>
+
+<h3>3. Закрити MacBook</h3>
+<p>Да, просто закрий макбук)</p>
+</details>
+
+<details>
+<summary>🆘 Що робити, якщо щось не працює</summary>
+
+<h3>📞 Кого кликати на допомогу</h3>
+<table class="contacts">
+  <tr><td>Інженер:</td><td>+380 63 309 86 21 (Євген Пивовар) — Telegram "@YP_work"</td></tr>
+  <tr><td>Інженер:</td><td>+380 75 290 27 04 (Назар Пустовіт) — Telegram "@nazar_pustovit_work"</td></tr>
+  <tr><td>Інженер:</td><td>+380 50 589 02 01 (Дмитро Мальований)</td></tr>
+</table>
+
+<h3>2 лекторій: не вмикається проектор</h3>
+<h4>Рішення</h4>
+<p>Зв'язатися з інженером, щоб перезавантажив проектор (виконується в дистанційному режимі).</p>
+
+<h3>2 лекторій: проектор увімкнувся, але не виводить зображення / виводить шум / не ловить сигнал від AppleTV</h3>
+<p><strong>Приклад:</strong></p>
+<img src="https://lh3.googleusercontent.com/d/1MXpxfdCTL9hf13myFHoBFHdB7ra7uYNw=w1600" alt="Приклад шуму">
+<h4>Рішення</h4>
+<ol>
+  <li>Перезапустити Kramer</li>
+  <li>Відкрутити кабель живлення</li>
+  <li>Від'єднати кабель живлення</li>
+  <li>Після того як Kramer вимкнеться, під'єднати кабель живлення</li>
+  <li>Закрутити кабель живлення</li>
+  <li>Перезапустити AppleTV</li>
+</ol>
+<p><strong>📷 Відеоінструкція:</strong></p>
+<a class="video-link" href="https://drive.google.com/file/d/1k7oJVMqRLjJYGt9bpnhBSDL7BXAzih8x/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
+
+<h3>Відсутній звук з колонок</h3>
+<h4>Рішення</h4>
+<p>Перевірити Settings &gt; Sound &gt; Input та Output.</p>
+<p>Правильні налаштування:</p>
+<ol>
+  <li>Input - USB Audio CODEC для обох лекторіїв</li>
+  <li>Output:
+    <ul>
+      <li>School 1 AirPlay - для першого лекторію</li>
+      <li>School 2 AirPlay - для другого лекторію</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Онлайн не чує офлайн</h3>
+<h4>Рішення</h4>
+<ol>
+  <li>Перевірити, чи не вимкнений звук на самих мікрофонах</li>
+  <li>Гарнітура: натиснути на клавішу Mute на 2 секунди</li>
+  <li>Ручний мікрофон: потрібно підняти боковий перемикач з червоного на зелений (Дивись Крок 3)</li>
+  <li>Перевірити, чи правильні налаштування обрані в Zoom/Google Meet (Дивись Крок 5)</li>
+  <li>Перевірити Settings &gt; Sound &gt; Input</li>
+  <li>Правильні налаштування: Input - USB Audio CODEC для обох лекторіїв</li>
+  <li>(Дивись Крок 4 &gt; Підключення звуку)</li>
+  <li>Перевірити наявність візуального сигналу в Settings &gt; Sound &gt; Input &gt; Input Level, коли говорите в мікрофон</li>
+  <li>(Дивись Крок 4 &gt; Підключення звуку)</li>
+  <li>З Кроку 4 &gt; Підключення звуку &gt; Пункт 4: від'єднати кабель, почекати декілька секунд, підключити його знову, повторити пункти 1-4</li>
+</ol>
+
+<h3>Офлайн не чує онлайн</h3>
+<h4>Рішення</h4>
+<ol>
+  <li>Перевірити, чи правильні налаштування обрані в Zoom/Google Meet (Дивись Крок 5)</li>
+  <li>Перевірити Settings &gt; Sound &gt; Output</li>
+  <li>Повинно бути обрано: School 1 AirPlay для першого лекторію, School 2 AirPlay для другого лекторію</li>
+</ol>
+
+<h3>Не працює AirPlay/AppleTV/Проектор</h3>
+<h4>Рішення</h4>
+<ol>
+  <li>Перезавантажити проектор</li>
+  <li>Перезавантажити AppleTV</li>
+</ol>
+
+<h3>Не йде звук з презентації в офлайн</h3>
+<h4>Рішення</h4>
+<p>Перевірити Settings &gt; Sound &gt; Output.</p>
+<p>Повинно бути обрано:</p>
+<ul>
+  <li>School 1 AirPlay для першого лекторію</li>
+  <li>School 2 AirPlay для другого лекторію</li>
+</ul>
+
+<h3>Не йде звук з презентації в онлайн</h3>
+<h4>Рішення</h4>
+<ol>
+  <li>Зупинити "Шерінг екрану"</li>
+  <li>Ще раз повторити Крок 6</li>
+  <li><strong>Обов'язково</strong> перевірити, чи стоїть галочка біля: Google Meet - Also share computer audio; Zoom - Share sound</li>
+</ol>
+
+<h3>Не підключається Камера</h3>
+<h4>Рішення</h4>
+<ol>
+  <li>Перевірити кабель живлення, чи підключений він до розетки</li>
+  <li>Перевірити, чи підключена камера до MacBook через <strong>ОКРЕМИЙ</strong> Type-C роз'єм</li>
+  <li>В GoogleMeet/Zoom перевірити, чи правильно обрані налаштування (Дивись Крок 5)</li>
+</ol>
+
+<h3>Не працює клікер</h3>
+<h4>Рішення</h4>
+<ol>
+  <li>Перевірити, чи підключений він до MacBook через USB-Hub</li>
+  <li>Перевести курсор на Extended Display (той, що виводиться з проектора) та клікнути один раз на презентацію, щоб він почав працювати на екрані з презентацією</li>
+</ol>
+
+<h3>Проєктор вивів меню</h3>
+<p><strong>Приклад:</strong></p>
+<img src="https://lh3.googleusercontent.com/d/16ps0TA4DR3_zyAq72zOkxWcP3_GmtDC6=w1600" alt="Меню проєктора">
+<h4>Рішення</h4>
+<ol>
+  <li>Взяти пульт від проєктора</li>
+  <li>За допомогою стрілочок обрати потрібний пристрій, що виводить AppleTV, та натиснути на середню кнопку "Enter"</li>
+</ol>
+<p>В даному випадку це HDMI 3</p>
+<img src="https://lh3.googleusercontent.com/d/1Hgy57695_RmCsdKsBu2OqHoGLrdf44EC=w1600" alt="HDMI 3">
+</details>
+
+</body>
+</html>
