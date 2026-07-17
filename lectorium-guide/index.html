@@ -16,73 +16,54 @@
   })();
 </script>
 <style>
+  /* ===== Genesis brand tokens (see Genesis Brandbook) ===== */
   :root {
-    --bg: #0f1115;
-    --panel: #161a22;
-    --panel-2: #1d222c;
-    --border: #2a3140;
-    --text: #e6e8ec;
-    --muted: #a3adbd;
-    --accent: #5aa0ff;
-    --accent-2: #6ad29a;
-    --warn: #ffb55a;
-    --danger: #ff6a6a;
-    --code-bg: #0b0e13;
-    --code-border: #2a3140;
-    --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+    /* Sidebar is always branded chrome — Leadership Blue — regardless of the
+       content theme toggle below. */
+    --sb-bg: #140F2E;
+    --sb-bg-2: #1F1A44;
+    --sb-border: #2A2456;
+    --sb-text: #FFFFFF;
+    --sb-muted: #B7B3D1;
+    --sb-accent: #FFBC0F; /* Vibrant Yellow — small accent only, per brand rule */
+
+    /* Content pane — Light (default) theme */
+    --bg: #FFFFFF;         /* Clear White */
+    --panel: #FFFFFF;
+    --panel-2: #F2F2F2;    /* Light Gray */
+    --panel-3: #ECEBF5;    /* Light Purple */
+    --border: #E6E3F2;
+    --text: #161616;       /* Soft Black */
+    --muted: #898796;      /* Soft Gray */
+    --accent: #433298;     /* Ambitious Purple — text/links only valid on light bg */
+    --accent-2: #140F2E;   /* Leadership Blue — secondary strong accent */
+    --warn: #FFBC0F;       /* Vibrant Yellow — decorative/border/tint only, never as text color */
+    --code-bg: #F2F2F2;
+    --code-border: #E6E3F2;
+
+    --font-heading: 'Rubik', 'Century Gothic', -apple-system, BlinkMacSystemFont, sans-serif; /* Gilroy substitute — Rubik has full Cyrillic coverage */
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
   }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f6f7f9;
-      --panel: #ffffff;
-      --panel-2: #f0f2f6;
-      --border: #d8dde6;
-      --text: #1a1d23;
-      --muted: #4f5a69;
-      --accent: #2566c8;
-      --accent-2: #1f8a52;
-      --warn: #b15c00;
-      --danger: #c0392b;
-      --code-bg: #f0f2f6;
-      --code-border: #d8dde6;
-    }
-  }
-  /* Manual toggle overrides — win over the OS-level prefers-color-scheme above */
+  /* Manual dark-mode override — mirrors the brand's own dark divider slides
+     (Leadership Blue background, white text only — no colored text on dark). */
   :root[data-theme="dark"] {
-    --bg: #0f1115;
-    --panel: #161a22;
-    --panel-2: #1d222c;
-    --border: #2a3140;
-    --text: #e6e8ec;
-    --muted: #a3adbd;
-    --accent: #5aa0ff;
-    --accent-2: #6ad29a;
-    --warn: #ffb55a;
-    --danger: #ff6a6a;
-    --code-bg: #0b0e13;
-    --code-border: #2a3140;
+    --bg: #140F2E;
+    --panel: #1B1642;
+    --panel-2: #221C4E;
+    --panel-3: #2A2456;
+    --border: #332C5E;
+    --text: #FFFFFF;
+    --muted: #B7B3D1;
+    --accent: #FFFFFF;
+    --accent-2: #FFFFFF;
+    --warn: #FFBC0F;
+    --code-bg: #0F0B28;
+    --code-border: #332C5E;
   }
-  :root[data-theme="light"] {
-    --bg: #f6f7f9;
-    --panel: #ffffff;
-    --panel-2: #f0f2f6;
-    --border: #d8dde6;
-    --text: #1a1d23;
-    --muted: #4f5a69;
-    --accent: #2566c8;
-    --accent-2: #1f8a52;
-    --warn: #b15c00;
-    --danger: #c0392b;
-    --code-bg: #f0f2f6;
-    --code-border: #d8dde6;
-  }
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
   * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0; background: var(--bg);
-    height: 100%; overflow: hidden; /* the page itself never scrolls — see .sidebar / .content below */
-  }
+  html, body { margin: 0; padding: 0; background: var(--bg); height: 100%; overflow: hidden; }
   body {
     font-family: var(--font-body);
     color: var(--text);
@@ -103,22 +84,27 @@
     line-height: 1.5;
   }
 
-  /* layout — app-shell: .app fills exactly one viewport (whatever height the
-     embedding iframe/box gives us), and .sidebar / .content each scroll
-     independently within it. This avoids relying on the outer page/iframe
-     to forward scroll — which Google Sites embeds don't always do. */
-  .app { display: grid; grid-template-columns: 270px minmax(0, 1fr); height: 100vh; width: 100%; }
+  /* layout — .app fills exactly one viewport (whatever height the embedding
+     box/iframe gives us). .sidebar always self-scrolls (height:100vh); .content
+     is capped at max-height:100vh (NOT a forced height), so it only ever
+     occupies as much room as its real content needs — no artificial blank
+     space if the surrounding embed box is taller than the guide itself. */
+  .app { display: grid; grid-template-columns: 270px minmax(0, 1fr); height: 100vh; width: 100%; align-items: start; }
   .sidebar {
-    background: var(--panel);
-    border-right: 1px solid var(--border);
+    background: var(--sb-bg);
+    border-right: 1px solid var(--sb-border);
     padding: 22px 18px 30px;
     height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
   .sidebar-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-  .sidebar h1 { font-size: 15px; font-weight: 700; margin: 0 0 4px; line-height: 1.3; }
-  .sidebar .meta { font-size: 11.5px; color: var(--muted); margin-bottom: 18px; }
+  .sidebar-brand {
+    display: block; font-family: var(--font-heading); font-weight: 600; font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--sb-accent); margin-bottom: 6px;
+  }
+  .sidebar h1 { font-family: var(--font-heading); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; line-height: 1.3; color: var(--sb-text); }
+  .sidebar .meta { font-size: 11.5px; color: var(--sb-muted); margin-bottom: 18px; }
   .theme-toggle {
     flex-shrink: 0;
     display: inline-flex;
@@ -127,16 +113,16 @@
     width: 30px;
     height: 30px;
     border-radius: 8px;
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    color: var(--muted);
+    background: var(--sb-bg-2);
+    border: 1px solid var(--sb-border);
+    color: var(--sb-muted);
     cursor: pointer;
     font-size: 15px;
     line-height: 1;
   }
-  .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+  .theme-toggle:hover { color: var(--sb-text); border-color: var(--sb-accent); }
   /* Icon shown is driven purely by JS via body.theme-is-dark / body.theme-is-light,
-     so it reflects the *effective* theme (explicit override or OS default) correctly. */
+     so it reflects the *effective* theme (explicit override or default) correctly. */
   .theme-toggle .icon-sun, .theme-toggle .icon-moon { display: none; }
   body.theme-is-dark .theme-toggle .icon-moon { display: inline; }
   body.theme-is-light .theme-toggle .icon-sun { display: inline; }
@@ -146,104 +132,102 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    background: var(--panel-2);
-    border: 1px solid var(--border);
+    background: var(--sb-bg-2);
+    border: 1px solid var(--sb-border);
     border-radius: 6px;
-    color: var(--text);
+    color: var(--sb-text);
     cursor: pointer;
     font: inherit;
     font-size: 13.5px;
     margin: 10px 0 12px;
     padding: 8px 10px;
   }
-  .nav-menu-toggle::after { content: "▾"; color: var(--muted); font-size: 12px; transition: transform .18s ease; }
+  .nav-menu-toggle::after { content: "▾"; color: var(--sb-muted); font-size: 12px; transition: transform .18s ease; }
   .sidebar.nav-open .nav-menu-toggle::after { transform: rotate(180deg); }
   .nav-controls { margin-bottom: 10px; }
   .nav-search {
     width: 100%;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
+    background: var(--sb-bg-2);
+    border: 1px solid var(--sb-border);
     border-radius: 7px;
-    color: var(--text);
+    color: var(--sb-text);
     font: inherit;
     font-size: 13px;
     padding: 8px 10px;
   }
-  .nav-search::placeholder { color: var(--muted); }
+  .nav-search::placeholder { color: var(--sb-muted); }
   .nav-group { margin: 2px 0; }
   .nav-group-head { display: grid; grid-template-columns: 1fr 28px; align-items: center; gap: 4px; margin-top: 12px; }
   .nav-collapse {
     width: 28px; height: 28px; display: grid; place-items: center;
     background: transparent; border: 1px solid transparent; border-radius: 6px;
-    color: var(--muted); cursor: pointer; font: inherit; line-height: 1;
+    color: var(--sb-muted); cursor: pointer; font: inherit; line-height: 1;
   }
-  .nav-collapse:hover { background: var(--panel-2); border-color: var(--border); color: var(--text); }
+  .nav-collapse:hover { background: var(--sb-bg-2); border-color: var(--sb-border); color: var(--sb-text); }
   .nav-collapse::before { content: "▾"; font-size: 11px; transition: transform .18s ease; }
   .nav-group.is-collapsed .nav-collapse::before { transform: rotate(-90deg); }
   .nav-group.is-collapsed .nav-group-items { display: none; }
   .sidebar.nav-searching .nav-group.is-collapsed .nav-group-items { display: block; }
   .nav-group.is-hidden, .sidebar nav a.is-hidden { display: none; }
-  .nav-empty { display: none; color: var(--muted); font-size: 12.5px; padding: 8px 10px; }
+  .nav-empty { display: none; color: var(--sb-muted); font-size: 12.5px; padding: 8px 10px; }
   .nav-empty.is-visible { display: block; }
   .sidebar nav a {
     display: block; padding: 6px 10px; margin: 2px 0; border-radius: 6px;
-    color: var(--text); font-size: 13.5px; border-left: 2px solid transparent;
+    color: var(--sb-text); font-size: 13.5px; border-left: 2px solid transparent;
   }
-  .sidebar nav a:hover { background: var(--panel-2); text-decoration: none; }
-  .sidebar nav a.is-active { background: var(--panel-2); color: var(--text); border-left-color: var(--accent-2); }
-  .sidebar nav a.sub { padding: 5px 10px 5px 20px; font-size: 12.8px; color: var(--muted); }
-  .sidebar nav a.sub.is-active { color: var(--text); }
+  .sidebar nav a:hover { background: var(--sb-bg-2); text-decoration: none; }
+  .sidebar nav a.is-active { background: var(--sb-bg-2); color: var(--sb-text); border-left-color: var(--sb-accent); }
+  .sidebar nav a.sub { padding: 5px 10px 5px 20px; font-size: 12.8px; color: var(--sb-muted); }
+  .sidebar nav a.sub.is-active { color: var(--sb-text); }
   .sidebar nav a.section-head {
     margin-top: 0; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-    color: var(--muted); border-left-color: transparent; padding: 7px 10px 7px 8px;
+    color: var(--sb-muted); border-left-color: transparent; padding: 7px 10px 7px 8px;
   }
-  .sidebar nav a.section-head:hover { color: var(--text); background: var(--panel-2); }
-  .sidebar nav a.section-head.is-active { color: var(--accent); border-left-color: var(--accent); background: var(--panel-2); }
+  .sidebar nav a.section-head:hover { color: var(--sb-text); background: var(--sb-bg-2); }
+  .sidebar nav a.section-head.is-active { color: var(--sb-text); border-left-color: var(--sb-accent); background: var(--sb-bg-2); }
 
   .content {
-    padding: 28px 40px 80px; width: 100%; max-width: 860px; min-width: 0;
-    height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 32px 48px 80px; width: 100%; max-width: 1320px; margin: 0 auto; min-width: 0;
+    max-height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
   }
-  .content h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0 8px; }
-  .content h2 { font-size: 20px; font-weight: 700; margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); scroll-margin-top: 20px; }
-  .content h3 { font-size: 16px; font-weight: 600; margin: 26px 0 8px; scroll-margin-top: 20px; }
+  .content h1 { font-family: var(--font-heading); font-size: 30px; font-weight: 600; letter-spacing: -0.01em; margin: 4px 0 10px; line-height: 1.15; }
+  .content h2 { font-family: var(--font-heading); font-size: 21px; font-weight: 600; margin: 42px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); scroll-margin-top: 20px; }
+  .content h3 { font-family: var(--font-heading); font-size: 16.5px; font-weight: 600; margin: 26px 0 8px; scroll-margin-top: 20px; }
   .content h4 { font-size: 14.5px; margin: 18px 0 6px; color: var(--text); font-weight: 650; }
-  .content p { margin: 8px 0 12px; }
+  .content p { margin: 8px 0 12px; text-align: left; }
   .content ul, .content ol { padding-left: 22px; margin: 8px 0 12px; }
   .content li { margin: 4px 0; }
   img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0; display: block; }
 
   .operator-card {
-    background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    background: var(--panel-3); border: 1px solid var(--border); border-left: 3px solid var(--accent);
     border-radius: 10px; margin: 18px 0 24px; padding: 16px;
   }
   .operator-card .eyebrow { color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: .08em; margin-bottom: 10px; text-transform: uppercase; }
   .operator-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .operator-item { background: var(--panel-2); border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; }
+  .operator-item { background: var(--panel); border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; }
   .operator-item strong { display: block; font-size: 12.5px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
   .operator-item span { color: var(--muted); display: block; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
 
-  .callout { border-left: 3px solid var(--accent); background: var(--panel); border-radius: 7px; padding: 12px 16px; margin: 12px 0; }
-  .callout.info { border-left-color: var(--accent); }
-  .callout.ok { border-left-color: var(--accent-2); background: color-mix(in srgb, var(--bg) 88%, var(--accent-2)); }
+  .callout { border-left: 3px solid var(--accent); background: var(--panel-3); border-radius: 7px; padding: 12px 16px; margin: 12px 0; }
+  .callout.info { border-left-color: var(--accent); background: var(--panel-3); }
+  .callout.ok { border-left-color: var(--accent-2); background: var(--panel-2); }
   .callout.warn { border-left-color: var(--warn); background: color-mix(in srgb, var(--bg) 88%, var(--warn)); }
-  .callout.danger { border-left-color: var(--danger); background: color-mix(in srgb, var(--bg) 85%, var(--danger)); }
+  .callout.danger { border-left-color: var(--warn); border-left-width: 5px; background: color-mix(in srgb, var(--bg) 80%, var(--warn)); }
   .callout .label {
     display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .08em;
     text-transform: uppercase; margin-right: 8px; color: var(--accent);
   }
   .callout.ok .label { color: var(--accent-2); }
-  .callout.warn .label { color: var(--warn); }
-  .callout.danger .label { color: var(--danger); }
+  .callout.warn .label, .callout.danger .label { color: var(--text); }
 
   .schema {
     font-family: var(--font-mono); font-size: 13px; line-height: 1.65; white-space: pre;
     background: var(--code-bg); border-radius: 8px; border-left: 3px solid var(--accent);
     padding: 14px 18px; margin: 12px 0; overflow-x: auto;
   }
-  .schema-video { border-left-color: #F2C744; background: color-mix(in srgb, var(--code-bg) 90%, #F2C744); }
-  .schema-audio { border-left-color: #3ecf82; background: color-mix(in srgb, var(--code-bg) 90%, #3ecf82); }
-  .schema-network { border-left-color: #1FB3A6; background: color-mix(in srgb, var(--code-bg) 90%, #1FB3A6); }
+  .schema-video, .schema-network { border-left-color: var(--accent); background: color-mix(in srgb, var(--code-bg) 92%, var(--accent)); }
+  .schema-audio { border-left-color: var(--accent-2); background: color-mix(in srgb, var(--code-bg) 92%, var(--accent-2)); }
 
   table.t { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
   table.t th, table.t td { border-bottom: 1px solid var(--border); padding: 8px 13px; text-align: left; vertical-align: top; }
@@ -255,7 +239,7 @@
   .checklist { list-style: none; padding: 0; margin: 8px 0 16px; }
   .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 7px 8px; border-radius: 6px; }
   .checklist li:hover { background: var(--panel-2); }
-  .checklist input[type="checkbox"] { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--accent-2); flex-shrink: 0; cursor: pointer; }
+  .checklist input[type="checkbox"] { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
   .checklist label { cursor: pointer; flex: 1; }
   .checklist input:checked + label { text-decoration: line-through; color: var(--muted); }
   .checklist-actions { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }
@@ -264,34 +248,39 @@
 
   .video-link {
     display: inline-flex; align-items: center; gap: 7px; margin: 6px 0; padding: 7px 14px; border-radius: 8px;
-    background: var(--panel-2); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 13px;
+    background: var(--panel); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 13px;
   }
-  .video-link:hover { background: color-mix(in srgb, var(--panel-2) 80%, var(--accent)); text-decoration: none; }
+  .video-link:hover { background: var(--accent); color: #fff; text-decoration: none; }
   .video-link::before { content: "▶"; font-size: 11px; }
 
   .contacts td { padding: 5px 10px 5px 0; vertical-align: top; }
 
   hr.soft { border: none; border-top: 1px solid var(--border); margin: 26px 0; }
   .back-top {
-    align-items: center; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px;
-    bottom: 18px; color: var(--text); display: inline-flex; height: 36px; justify-content: center;
+    align-items: center; background: var(--accent); border: 1px solid var(--accent); border-radius: 999px;
+    bottom: 18px; color: #fff; display: inline-flex; height: 36px; justify-content: center;
     position: fixed; right: 18px; width: 36px; z-index: 15;
   }
-  .back-top:hover { border-color: var(--accent); text-decoration: none; }
+  .back-top:hover { opacity: .88; text-decoration: none; }
+
+  /* Let cards/grids use extra room on wide screens instead of leaving it empty */
+  @media (min-width: 1180px) {
+    .operator-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
 
   @media (max-width: 880px) {
-    /* Below this width, revert the app-shell (independent-scroll) layout back to
-       classic whole-page scrolling with a sticky dropdown nav — simpler and safer
-       to stack in a narrow column than juggling two independent scroll areas. */
+    /* Below this width, revert to classic whole-page scrolling with a sticky
+       dropdown nav — simpler and safer to stack in a narrow column than
+       juggling two independent scroll areas. */
     html, body { height: auto; overflow: visible; }
     .app { grid-template-columns: 1fr; height: auto; }
     .sidebar {
       position: sticky; top: 0; z-index: 20; width: 100vw; max-width: 100vw;
-      height: auto; max-height: 85vh; padding: 14px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.22);
+      height: auto; max-height: 85vh; padding: 14px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
     }
     .nav-menu-toggle { display: flex; }
     .sidebar:not(.nav-open) .nav-controls, .sidebar:not(.nav-open) nav, .sidebar:not(.nav-open) .nav-empty { display: none; }
-    .content { width: 100vw; max-width: 100vw; height: auto; overflow: visible; overflow-x: hidden; padding: 20px; }
+    .content { width: 100vw; max-width: 100vw; height: auto; max-height: none; overflow: visible; overflow-x: hidden; padding: 20px; }
     .content h1 { font-size: 24px; }
     .operator-grid { grid-template-columns: 1fr; }
     .checklist li { padding: 8px; }
@@ -301,8 +290,8 @@
   @media print {
     .sidebar, .checklist-actions, .back-top { display: none; }
     .app { display: block; }
-    .content { padding: 0; max-width: 100%; }
-    body { background: #fff; color: #000; }
+    .content { padding: 0; max-width: 100%; max-height: none; overflow: visible; }
+    body { background: #fff; color: #000; height: auto; overflow: visible; }
   }
 </style>
 </head>
@@ -312,6 +301,7 @@
 <aside class="sidebar">
   <div class="sidebar-head">
     <div>
+      <span class="sidebar-brand">Genesis</span>
       <h1>Lectorium · Оленівська 23</h1>
       <div class="meta">Технічний гайд для оператора</div>
     </div>
@@ -781,16 +771,16 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <a class="back-top" href="#checklist" aria-label="Повернутися нагору" title="Повернутися нагору">↑</a>
 
 <script>
-  // Theme toggle: explicit override (localStorage) wins over OS prefers-color-scheme.
+  // Theme toggle: Genesis brand default is light; dark is an explicit,
+  // remembered opt-in (no OS prefers-color-scheme auto-switching, so the
+  // page always matches brand guidelines unless the visitor picks dark themselves).
   (function() {
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
-    const media = window.matchMedia('(prefers-color-scheme: light)');
 
     function effectiveTheme() {
       const explicit = root.getAttribute('data-theme');
-      if (explicit === 'dark' || explicit === 'light') return explicit;
-      return media.matches ? 'light' : 'dark';
+      return explicit === 'dark' ? 'dark' : 'light';
     }
 
     function reflectEffectiveTheme() {
@@ -809,7 +799,6 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
       });
     }
 
-    media.addEventListener('change', reflectEffectiveTheme);
     reflectEffectiveTheme();
   })();
 
