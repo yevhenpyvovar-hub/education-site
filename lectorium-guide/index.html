@@ -194,6 +194,23 @@
   .content h2 { font-family: var(--font-heading); font-size: 21px; font-weight: 600; margin: 42px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); scroll-margin-top: 20px; }
   .content h3 { font-family: var(--font-heading); font-size: 16.5px; font-weight: 600; margin: 26px 0 8px; scroll-margin-top: 20px; }
   .content h4 { font-size: 14.5px; margin: 18px 0 6px; color: var(--text); font-weight: 650; }
+
+  /* Collapsible sections — used for any point that includes photos, so the
+     page stays compact by default and the reader opens only what they need. */
+  .content details.img-section { margin: 0; }
+  .content details.img-section > summary {
+    position: relative; cursor: pointer; list-style: none; padding-left: 18px;
+  }
+  .content details.img-section > summary::-webkit-details-marker { display: none; }
+  .content details.img-section > summary::before {
+    content: "▸"; position: absolute; left: 0; top: 0.4em; color: var(--muted); font-size: 12px;
+  }
+  .content details.img-section[open] > summary::before { content: "▾"; }
+  .content details.img-section > summary:hover .h2-summary,
+  .content details.img-section > summary:hover .h3-summary { color: var(--accent); }
+  .content .h2-summary { display: block; font-family: var(--font-heading); font-size: 21px; font-weight: 600; margin: 42px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); scroll-margin-top: 20px; }
+  .content .h3-summary { display: block; font-family: var(--font-heading); font-size: 16.5px; font-weight: 600; margin: 26px 0 8px; scroll-margin-top: 20px; }
+  .content details.img-section .img-section-body { padding-top: 2px; }
   .content p { margin: 8px 0 12px; text-align: left; }
   .content ul, .content ol { padding-left: 22px; margin: 8px 0 12px; }
   .content li { margin: 4px 0; }
@@ -466,7 +483,9 @@
 <!-- ============================================= -->
 <h2 id="step1">Крок 1: Увімкнення мікрофонів</h2>
 
-<h3 id="s1-headset">Гарнітура ("Петлічка")</h3>
+<details class="img-section" id="s1-headset">
+<summary><span class="h3-summary">Гарнітура ("Петлічка")</span></summary>
+<div class="img-section-body">
 <p><strong>Як виглядає:</strong></p>
 <img src="photo_5217535802173234342_w.jpg" alt="Гарнітура">
 <ol>
@@ -485,12 +504,18 @@
 <img src="photo_5217535802173234335_w.jpg" alt="Увімкнена гарнітура">
 <p><strong>📷 Відео інструкція:</strong></p>
 <a class="video-link" href="https://drive.google.com/file/d/1UBnYUlKe1vTL8hQPFfu1CObrW_9oD_hz/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
+</div>
+</details>
 
-<h3 id="s1-handheld">Ручний мікрофон</h3>
+<details class="img-section" id="s1-handheld">
+<summary><span class="h3-summary">Ручний мікрофон</span></summary>
+<div class="img-section-body">
 <p>Взяти мікрофон зі станції яка знаходиться в Lectorium1 в технічному шкафу. <strong>Зелений</strong> мікрофон для Lectorium1 і <strong>Синій</strong> для Lectorium2.</p>
 <p><strong>Як виглядає мікрофон:</strong> (Приклад: мікрофон Lectorium2)</p>
 <img src="IMG_2394.jpg" alt="Ручний мікрофон">
 <p><strong>Увімкнений мікрофон</strong> має червону індикацію на нижній частині мікрофону, поруч з перемикачем "on/off". Якщо лампочка не горить, перемкни перемикач.</p>
+</div>
+</details>
 
 <div class="callout ok">
   <span class="label">Готово, якщо</span>
@@ -500,7 +525,9 @@
 <!-- ============================================= -->
 <h2 id="step2">Крок 2: Запуск та підключення до пристроїв для виведення зображення</h2>
 
-<h3 id="s2-projector">Увімкнути Проєктор</h3>
+<details class="img-section" id="s2-projector">
+<summary><span class="h3-summary">Увімкнути Проєктор</span></summary>
+<div class="img-section-body">
 <p>Взяти пульт білого кольору, що знаходиться на верхній поличці шафи та натиснути кнопку з символом ⏻ направляючи його на проєктор.</p>
 <p><strong>🖼️ Як виглядає пульт:</strong></p>
 <img src="IMG_2396.jpg" alt="Пульт проєктора">
@@ -517,8 +544,12 @@
   <span class="label">Lectorium 2 · проектор видає сірий шум</span>
   З лівої внутрішньої частини технічного шкафа висить пристрій Kramer. В нього є кабель живлення, який треба відкрутити, а потім витягнути. Після 5-секундного очікування можна підключати кабель.
 </div>
+</div>
+</details>
 
-<h3 id="s2-connect">Підключення до проєктора</h3>
+<details class="img-section" id="s2-connect">
+<summary><span class="h3-summary">Підключення до проєктора</span></summary>
+<div class="img-section-body">
 <div class="schema schema-video">MacBook ── HDMI/AirPlay ──► AppleTV / проєктор
                               └─► Extended Display ── School 1/2 AirPlay (звук)</div>
 <ol>
@@ -556,6 +587,8 @@
   <span class="label">Готово, якщо</span>
   AppleTV та Проєктор увімкнені, а зображення з MacBook (заставка) виводиться з проєктора.
 </div>
+</div>
+</details>
 
 <!-- ============================================= -->
 <h2 id="step3">Крок 3: Виведення презентації на екран</h2>
@@ -570,7 +603,9 @@
 <p><strong>📷 Відео інструкція:</strong></p>
 <a class="video-link" href="https://drive.google.com/file/d/1W2sJXzDHFwHkpnkL0Fl--UaiQ7Iv_aus/view?usp=drivesdk" target="_blank" rel="noopener">Відкрити відео</a>
 
-<h3 id="s3-ppt">Power Point</h3>
+<details class="img-section" id="s3-ppt">
+<summary><span class="h3-summary">Power Point</span></summary>
+<div class="img-section-body">
 <ol>
   <li>Відкрити презентацію</li>
   <li>В меню обрати Slide Show &gt; Play from Start</li>
@@ -578,8 +613,12 @@
 <img src="https://lh3.googleusercontent.com/d/1FTqv_mUAAI9H-Z1E9m6LOyNsu5T9Y75r=w1600" alt="Play from Start">
 <p>Що має статись: на Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик.</p>
 <img src="https://lh3.googleusercontent.com/d/1f6iQDusDVwWTMCpuouUnFTBvzOW-s901=w1600" alt="Результат PowerPoint">
+</div>
+</details>
 
-<h3 id="s3-keynote">Keynote</h3>
+<details class="img-section" id="s3-keynote">
+<summary><span class="h3-summary">Keynote</span></summary>
+<div class="img-section-body">
 <ol>
   <li>Відкрити презентацію</li>
   <li>Натиснути на "Play"</li>
@@ -587,9 +626,13 @@
 <img src="https://lh3.googleusercontent.com/d/1YN5C7fXPbD1cN4oKNXfdd48sIC6rlInk=w1600" alt="Play Keynote">
 <p>Що має статись: на Extended Display підключеного проектора виведеться презентація, а Macbook буде працювати як підказчик.</p>
 <img src="https://lh3.googleusercontent.com/d/1P8oyzLJycEVXQuNn-pCk6KcNTqcmd5wh=w1600" alt="Результат Keynote">
+</div>
+</details>
 
 <!-- ============================================= -->
-<h2 id="step4">Крок 4: Підключення клікера</h2>
+<details class="img-section" id="step4">
+<summary><span class="h2-summary">Крок 4: Підключення клікера</span></summary>
+<div class="img-section-body">
 <ol>
   <li>Знайти клікер в шафі на верхній поличці</li>
   <li>Дістати з нього "хвостик"</li>
@@ -603,11 +646,15 @@
   <li>Перевести курсор в праву сторону за межі екрану ноутбуку, ви його побачите на додатковому екрані, Extended Display (той, що виводиться з проектора). Потрібно клікнути один раз на презентацію, щоб він почав працювати на екрані з презентацією</li>
 </ol>
 <p>Що має статись: клікер виконує свої функції.</p>
+</div>
+</details>
 
 <!-- ============================================= -->
 <h2 id="step5">Крок 5: Перевірка звуку та відео в трансляції</h2>
 
-<h3 id="s5-meet">Google Meet</h3>
+<details class="img-section" id="s5-meet">
+<summary><span class="h3-summary">Google Meet</span></summary>
+<div class="img-section-body">
 <div class="schema schema-audio">Мікрофон / гарнітура ─► XENYX Q802USB ─► MacBook (USB Audio CODEC) ─► Google Meet
 Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <ol>
@@ -625,8 +672,12 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
   <li>Зайти в налаштування відео (стрілка вгору біля відеокамери): як відеокамеру обрати - Meeting Owl Camera</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1HN8ADju4YWGm2gw8WlV5fsWt7UEsvYy4=w1600" alt="Налаштування відео Meet">
+</div>
+</details>
 
-<h3 id="s5-zoom">Zoom</h3>
+<details class="img-section" id="s5-zoom">
+<summary><span class="h3-summary">Zoom</span></summary>
+<div class="img-section-body">
 <ol>
   <li>Під'єднатись до Zoom</li>
   <li>Зайти в налаштування аудіо (стрілка вгору біля мікрофону):
@@ -641,6 +692,8 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
   <li>Зайти в налаштування відео (стрілка вгору біля відеокамери): як відеокамеру обрати - Meeting Owl Camera</li>
 </ol>
 <img src="https://lh3.googleusercontent.com/d/1l37K-YuOdfj26DTLjgRzCHa_tT2oWEFu=w1600" alt="Налаштування відео Zoom">
+</div>
+</details>
 
 <div class="callout ok">
   <span class="label">Готово, якщо</span>
@@ -655,7 +708,9 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <!-- ============================================= -->
 <h2 id="step6">Крок 6: Виведення презентації в онлайн трансляцію</h2>
 
-<h3 id="s6-meet">Google Meet</h3>
+<details class="img-section" id="s6-meet">
+<summary><span class="h3-summary">Google Meet</span></summary>
+<div class="img-section-body">
 <ol>
   <li>Натиснути на кнопку "Поширити екран"</li>
 </ol>
@@ -673,8 +728,12 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <img src="https://lh3.googleusercontent.com/d/1LvS4IwxCLufhV21xh2LnkRDP3kOPS9Fq=w1600" alt="Опції поширення Meet">
 <ol start="3"><li>Після цього поверніться до розділу "Крок 4: Виведення презентації на екран"</li></ol>
 <p>Що має статись: глядачі в онлайні побачать презентацію.</p>
+</div>
+</details>
 
-<h3 id="s6-zoom">Zoom</h3>
+<details class="img-section" id="s6-zoom">
+<summary><span class="h3-summary">Zoom</span></summary>
+<div class="img-section-body">
 <ol><li>Натиснути на кнопку "Share"</li></ol>
 <img src="https://lh3.googleusercontent.com/d/1kLO-4KPPJqFeK7NwaMN9XM4loghS9Kkq=w1600" alt="Share Zoom">
 <ol start="2">
@@ -689,12 +748,16 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <img src="https://lh3.googleusercontent.com/d/1vlVq5G5azQ51LRiqNE7PzMvvmLL248vp=w1600" alt="Опції Share Zoom">
 <ol start="3"><li>Після цього поверніться до розділу "Крок 4: Виведення презентації на екран"</li></ol>
 <p>Що має статись: глядачі в онлайні побачать презентацію.</p>
+</div>
+</details>
 
 <!-- ============================================= -->
 <h2 id="shutdown">🔴 Відключення лекторія (в зворотньому порядку!)</h2>
 <div class="callout warn"><span class="label">Важливо</span> Відключаємо в зворотньому порядку до увімкнення!</div>
 
-<h3 id="sd-mics">1. Вимкнення мікрофонів</h3>
+<details class="img-section" id="sd-mics">
+<summary><span class="h3-summary">1. Вимкнення мікрофонів</span></summary>
+<div class="img-section-body">
 <h4>Ручний мікрофон:</h4>
 <ol>
   <li>Поставити ручний мікрофон в зарядну станцію, таким чином щоб коннектори були з'єднані з коннекторами зарядної станції.<br>
@@ -716,6 +779,8 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
 <img src="2026-06-25_11.57.56.jpg" alt="Зарядна станція - розташування">
 <p><strong>Зарядна станція і як ставити батарейки</strong></p>
 <img src="telegram-cloud-photo-size-2-5325656952400452513-y.jpg" alt="Зарядна станція">
+</div>
+</details>
 
 <h3 id="sd-projector">2. Вимкнути проектор</h3>
 <ol>
@@ -967,6 +1032,10 @@ Google Meet ─► School 1/2 AirPlay ─► колонки залу</div>
       if (!hash || !hash.startsWith('#') || hash.length < 2) return false;
       const el = document.getElementById(hash.slice(1));
       if (!el) return false;
+      // If the target is (or is inside) a collapsed image section, open it —
+      // navigating there means the reader wants to see it, not just find it.
+      const collapsible = el.matches && el.matches('details.img-section') ? el : el.closest('details.img-section');
+      if (collapsible && !collapsible.open) collapsible.open = true;
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       try { history.replaceState(null, '', hash); } catch (e) {}
       setActiveLink(hash);
