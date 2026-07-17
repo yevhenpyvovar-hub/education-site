@@ -63,7 +63,13 @@
   }
   @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg);
+    /* Stops the scroll "bump" at the very top/bottom: no macOS rubber-band
+       bounce, and no chaining of our scroll into the surrounding Google Sites
+       parent frame. The page still reaches its true top/bottom in one gesture. */
+    overscroll-behavior-y: none;
+  }
   body {
     font-family: var(--font-body);
     color: var(--text);
@@ -98,6 +104,10 @@
     top: 0;
     height: 100vh;
     overflow-y: auto;
+    /* contain = the sidebar's own scroll never chains to the page, so moving
+       the wheel over the sidebar can't "eat" a tick at its scroll boundary
+       before the page continues. */
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
   .sidebar-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
