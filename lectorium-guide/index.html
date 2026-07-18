@@ -307,12 +307,16 @@
   }
 
   @media (max-width: 880px) {
-    /* Below this width, the sidebar becomes a dropdown instead of a sticky
-       rail — simpler to use when stacked in a single narrow column. */
+    /* Below this width, the sidebar becomes a dropdown at the top of the page.
+       It is NOT sticky — it scrolls away with the page as you read, instead of
+       pinning to the top and covering a third of the screen. To navigate, the
+       reader scrolls back up (or taps the back-to-top button) and opens it. */
     .app { grid-template-columns: 1fr; }
     .sidebar {
-      position: sticky; top: 0; z-index: 20; width: 100vw; max-width: 100vw;
-      height: auto; max-height: 85vh; padding: 14px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
+      position: static; width: 100vw; max-width: 100vw;
+      height: auto; max-height: none; overflow: visible;
+      padding: 14px 16px;
+      border-right: none; border-bottom: 1px solid var(--sb-border);
     }
     .nav-menu-toggle { display: flex; }
     .sidebar:not(.nav-open) .nav-controls, .sidebar:not(.nav-open) nav, .sidebar:not(.nav-open) .nav-empty { display: none; }
